@@ -27,4 +27,27 @@ Two pieces of information are mandatory: the difficulty rating (1-15) and the st
 
 The PiLSI is easy to understand and implement in any cave setting and corresponding cave map, which can aid in route planning and training exercises.
 
-The PiLSI is named after prominent South Australian cavers Graham Pilkington (photo below left2) and Ian Lewis (photo below right3).
+The PiLSI is named after prominent South Australian cavers Graham Pilkington (photo below left) and Ian Lewis (photo below right).
+
+## Dev notes
+
+I've configured the .env file to use the following ports:
+
+- 3000 for the webite
+- 3306 for MySQL
+
+You can start the application with:
+
+    sail up -d
+
+Once running see the site with:
+
+    http://localhost:3000/
+
+Filament is installed to for managing the admin area.  You can create a user with
+
+    sail artisan make:filament-user
+
+Admin section can be found at this location in case future me forgets:
+
+    http://localhost:3000/admin
