@@ -52,8 +52,8 @@ You'll probably need to add yourself as a user:
 
 All things going well, access the site with:
 
-    [Frontend](http://localhost:3000)
-    [Admin](http://localhost:3000/admin)
+- [Frontend](http://localhost:3000)
+- [Admin](http://localhost:3000/admin)
 
 ### Technical info
 
