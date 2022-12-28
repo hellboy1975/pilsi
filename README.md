@@ -31,26 +31,42 @@ The PiLSI is named after prominent South Australian cavers Graham Pilkington (ph
 
 ## Dev notes
 
+### Setting up your dev environment
+
+For local development I've been using [Laravel Sail](https://laravel.com/docs/9.x/sail).  To get it up and running, make sure you do the following:
+
+    cp .env.example .env
+    composer install
+    sail up -d
+    sail composer update
+    sail artisan key:generate
+    sail artisan migrate:fresh
+
+Typically you'll want to add some data:
+
+    sail artisan db:seed
+
+You'll probably need to add yourself as a user:
+
+    sail artisan make:filament-user
+
+All things going well, access the site with:
+
+    [Frontend](http://localhost:3000)
+    [Admin](http://localhost:3000/admin)
+
+### Technical info
+
 I've configured the .env file to use the following ports:
 
-- 3000 for the webite
+- 3000 for the website
 - 3306 for MySQL
 
-If you've not run this site on your dev env before, you should start with:
-    composer install
+These are set in the .env file
+
+### Daily operations
 
 You can start the application with:
 
     sail up -d
 
-Once running see the site with:
-
-    http://localhost:3000/
-
-Filament is installed to for managing the admin area.  You can create a user with
-
-    sail artisan make:filament-user
-
-Admin section can be found at this location in case future me forgets:
-
-    http://localhost:3000/admin
