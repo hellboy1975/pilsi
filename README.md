@@ -17,7 +17,7 @@ This site uses the Laravel Framework, as well as the very useful Filament packag
 
 ## About PiLSI
 
-A squeeze is a passage or element of a cave that requires careful consideration or planning of body positioning and movement to pass through.1  
+A squeeze is a passage or element of a cave that requires careful consideration or planning of body positioning and movement to pass through.
 
 Utilising the Pilkington-Lewis Squeeze Index (PiLSI) cave constrictions can be rated similarly to the climbing grades used by rock climbers.
 
@@ -35,6 +35,9 @@ I've configured the .env file to use the following ports:
 
 - 3000 for the webite
 - 3306 for MySQL
+
+If you've not run this site on your dev env before, you should start with:
+    composer install
 
 You can start the application with:
 
