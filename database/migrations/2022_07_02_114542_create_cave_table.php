@@ -20,7 +20,7 @@ class CreateCaveTable extends Migration
             $table->string('code');
             $table->foreignIdFor(Region::class);
             $table->string('description');
-            $table->string('main_picture');
+            $table->string('main_picture')->nullable();
             $table->timestamps();
         });
     }
