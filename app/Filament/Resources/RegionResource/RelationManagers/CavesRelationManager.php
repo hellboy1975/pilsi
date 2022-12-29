@@ -37,13 +37,17 @@ class CavesRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('code')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                ->label('New Cave'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
