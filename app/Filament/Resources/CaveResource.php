@@ -4,10 +4,13 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CaveResource\Pages;
 use App\Models\Cave;
+use App\Models\Region;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
+use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 
 class CaveResource extends Resource
 {
@@ -25,6 +28,8 @@ class CaveResource extends Resource
                 Forms\Components\TextInput::make('code')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\Select::make('region_id')
+                    ->relationship('region', 'name'),
                 Forms\Components\RichEditor::make('description')
                     ->required()
                     ->maxLength(255)
@@ -37,10 +42,18 @@ class CaveResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('code')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('region.name')
+                    ->searchable()
+                    ->sortable(),
             ])
             ->filters([
-                //
+                SelectFilter::make('region')->relationship('region', 'name')
             ]);
     }
 
