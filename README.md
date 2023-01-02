@@ -40,11 +40,7 @@ For local development I've been using [Laravel Sail](https://laravel.com/docs/9.
     sail up -d
     sail composer update
     sail artisan key:generate
-    sail artisan migrate:fresh
-
-Typically you'll want to add some data:
-
-    sail artisan db:seed
+    sail artisan migrate:fresh --seed
 
 You'll probably need to add yourself as a user:
 
