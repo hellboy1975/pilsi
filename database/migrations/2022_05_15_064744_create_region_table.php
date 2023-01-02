@@ -33,6 +33,6 @@ class CreateRegionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('region');
+        Schema::dropIfExists('regions');
     }
 }

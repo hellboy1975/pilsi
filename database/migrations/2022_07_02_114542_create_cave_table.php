@@ -32,6 +32,6 @@ class CreateCaveTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cave');
+        Schema::dropIfExists('caves');
     }
 }
