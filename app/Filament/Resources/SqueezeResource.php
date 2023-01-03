@@ -32,11 +32,16 @@ class SqueezeResource extends Resource
                     ->maxLength(255),
                 Forms\Components\Select::make('cave_id')
                     ->relationship('cave', 'name'),
+                Forms\Components\Select::make('user_id')
+                    ->relationship('user', 'name')
+                    ->label("Added by")
+                    ->default(auth()->user()->id),
                 Forms\Components\RichEditor::make('description')
                     ->required()
                     ->maxLength(255)
-                    ->columnSpan(['default' => 1]),
+                    ->columnSpan(['default' => 2]),
                 Forms\Components\FileUpload::make('main_picture'),
+                //TODO: need to add the current user id to the form
             ]);
     }
 
