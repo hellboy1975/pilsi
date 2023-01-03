@@ -41,7 +41,6 @@ class SqueezeResource extends Resource
                     ->maxLength(255)
                     ->columnSpan(['default' => 2]),
                 Forms\Components\FileUpload::make('main_picture'),
-                //TODO: need to add the current user id to the form
             ]);
     }
 
