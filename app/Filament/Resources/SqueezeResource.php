@@ -2,19 +2,21 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CaveResource\Pages;
-use App\Models\Cave;
+use App\Filament\Resources\SqueezeResource\Pages;
+use App\Filament\Resources\SqueezeResource\RelationManagers;
+use App\Models\Squeeze;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Filament\Tables\Filters\SelectFilter;
-use App\Filament\Resources\CaveResource\RelationManagers\SqueezesRelationManager;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class CaveResource extends Resource
+
+class SqueezeResource extends Resource
 {
-    protected static ?string $model = Cave::class;
+    protected static ?string $model = Squeeze::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -25,11 +27,15 @@ class CaveResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('code')
+                Forms\Components\TextInput::make('pilsi')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Select::make('region_id')
-                    ->relationship('region', 'name'),
+                Forms\Components\Select::make('cave_id')
+                    ->relationship('cave', 'name'),
+                Forms\Components\Select::make('user_id')
+                    ->relationship('user', 'name')
+                    ->label("Added by")
+                    ->default(auth()->user()->id),
                 Forms\Components\RichEditor::make('description')
                     ->required()
                     ->maxLength(255)
@@ -42,34 +48,40 @@ class CaveResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('code')
-                    ->searchable()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('region.name')
+                Tables\Columns\TextColumn::make('cave.name')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('pilsi')
                     ->searchable()
                     ->sortable(),
             ])
             ->filters([
-                SelectFilter::make('region')->relationship('region', 'name')
+                //
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-
+    
     public static function getRelations(): array
     {
         return [
-            SqueezesRelationManager::class
+            //
         ];
     }
-
+    
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCaves::route('/'),
-            'create' => Pages\CreateCave::route('/create'),
-            'edit' => Pages\EditCave::route('/{record}/edit'),
+            'index' => Pages\ListSqueezes::route('/'),
+            'create' => Pages\CreateSqueeze::route('/create'),
+            'edit' => Pages\EditSqueeze::route('/{record}/edit'),
         ];
-    }
+    }    
 }

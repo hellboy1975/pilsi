@@ -1,11 +1,12 @@
 <?php
 
-use App\Models\Region;
+use App\Models\Cave;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCaveTable extends Migration
+class CreateSqueezesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +15,12 @@ class CreateCaveTable extends Migration
      */
     public function up()
     {
-        Schema::create('caves', function (Blueprint $table) {
+        Schema::create('squeezes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('code');
-            $table->foreignIdFor(Region::class);
+            $table->string('pilsi');
+            $table->foreignIdFor(Cave::class);
+            $table->foreignIdFor(User::class);
             $table->string('description');
             $table->string('main_picture')->nullable();
             $table->timestamps();
@@ -32,6 +34,6 @@ class CreateCaveTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('caves');
+        Schema::dropIfExists('squeezes');
     }
 }
