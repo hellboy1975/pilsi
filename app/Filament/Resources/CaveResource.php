@@ -4,13 +4,13 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CaveResource\Pages;
 use App\Models\Cave;
-use App\Models\Region;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
+use App\Filament\Resources\CaveResource\RelationManagers\SqueezesRelationManager;
 
 class CaveResource extends Resource
 {
@@ -33,7 +33,7 @@ class CaveResource extends Resource
                 Forms\Components\RichEditor::make('description')
                     ->required()
                     ->maxLength(255)
-                    ->columnSpan(['default' => 1]),
+                    ->columnSpan(['default' => 2]),
                 Forms\Components\FileUpload::make('main_picture'),
             ]);
     }
@@ -60,7 +60,7 @@ class CaveResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            SqueezesRelationManager::class
         ];
     }
 
