@@ -33,7 +33,7 @@ class RegionResource extends Resource
                 Forms\Components\RichEditor::make('description')
                     ->required()
                     ->maxLength(255)
-                    ->columnSpan(['default' => 1]),
+                    ->columnSpan(['default' => 2]),
             ]);
     }
 
