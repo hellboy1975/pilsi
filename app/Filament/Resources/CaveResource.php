@@ -16,7 +16,11 @@ class CaveResource extends Resource
 {
     protected static ?string $model = Cave::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-stop';
+
+    protected static ?string $navigationGroup = 'Data';
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
