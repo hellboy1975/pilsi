@@ -15,7 +15,11 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
+    protected static ?string $navigationGroup = 'Settings';
+
     protected static ?string $navigationIcon = 'heroicon-o-users';
+
+    protected static ?int $navigationSort = 10;
 
     public static function form(Form $form): Form
     {
@@ -32,6 +36,13 @@ class UserResource extends Resource
                     ->password()
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('avatar_url')
+                    ->label('Avatar URL')
+                    ->maxLength(255),
+                Forms\Components\RichEditor::make('bio')
+                    ->label("User Biography")
+                    ->maxLength(5000)
+                    ->columnSpan(['default' => 2]),
             ]);
     }
 
