@@ -66,3 +66,10 @@ You can start the application with:
 
     sail up -d
 
+*Laravel Mix* is used to build the css and js.  You can do this with:
+
+    sail npx mix
+
+You can also set it to watch if you fancy:
+
+    sail npx mix watch
