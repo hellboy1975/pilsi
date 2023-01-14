@@ -16,3 +16,4 @@ yarn-error.log
 /.editorconfig
 
 /public/vendor
+public/js/app.js.LICENSE.txt
