@@ -2,28 +2,25 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SqueezeResource\Pages;
-use App\Filament\Resources\SqueezeResource\RelationManagers;
-use App\Models\Squeeze;
-use App\Models\User;
+use App\Filament\Resources\TripResource\Pages;
+use App\Filament\Resources\TripResource\RelationManagers;
+use App\Models\Trip;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Filters\SelectFilter;
 
-
-class SqueezeResource extends Resource
+class TripResource extends Resource
 {
-    protected static ?string $model = Squeeze::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-inbox-in';
+    protected static ?string $model = Trip::class;
 
     protected static ?string $navigationGroup = 'Data';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?string $navigationIcon = 'heroicon-o-trending-up';
+
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
@@ -31,21 +28,25 @@ class SqueezeResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('pilsi')
+                    ->maxLength(255)
+                    ->columnSpan(['default' => 2]),
+                Forms\Components\TextInput::make('trip_leader')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Select::make('cave_id')
-                    ->relationship('cave', 'name'),
+                Forms\Components\Select::make('region_id')
+                    ->relationship('region', 'name'),
+                Forms\Components\DatePicker::make('start_date')
+                    ->required(),
+                Forms\Components\DatePicker::make('end_date')
+                    ->required(),
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
                     ->label("Added by")
                     ->default(auth()->user()->id),
-                Forms\Components\RichEditor::make('description')
+                Forms\Components\RichEditor::make('notes')
                     ->required()
                     ->maxLength(255)
-                    ->columnSpan(['default' => 2]),
-                Forms\Components\FileUpload::make('main_picture'),
+                    ->columnSpan(['default' => 2])
             ]);
     }
 
@@ -56,15 +57,18 @@ class SqueezeResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('cave.name')
+                Tables\Columns\TextColumn::make('trip_leader')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('pilsi')
+                Tables\Columns\TextColumn::make('region.name')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('start_date')
                     ->searchable()
                     ->sortable(),
             ])
             ->filters([
-                //
+                SelectFilter::make('region')->relationship('region', 'name')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -84,9 +88,9 @@ class SqueezeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSqueezes::route('/'),
-            'create' => Pages\CreateSqueeze::route('/create'),
-            'edit' => Pages\EditSqueeze::route('/{record}/edit'),
+            'index' => Pages\ListTrips::route('/'),
+            'create' => Pages\CreateTrip::route('/create'),
+            'edit' => Pages\EditTrip::route('/{record}/edit'),
         ];
     }    
 }

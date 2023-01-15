@@ -59,7 +59,8 @@ class RegionResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\CavesRelationManager::class
+            RelationManagers\CavesRelationManager::class,
+            RelationManagers\TripsRelationManager::class
         ];
     }
 
