@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\SqueezeResource\Pages;
 use App\Filament\Resources\SqueezeResource\RelationManagers;
 use App\Models\Squeeze;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
