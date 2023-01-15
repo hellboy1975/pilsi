@@ -73,3 +73,12 @@ You can start the application with:
 You can also set it to watch if you fancy:
 
     sail npx mix watch
+
+### Credits
+
+This site leverages the following frameworks and libraries:
+
+- [Laravel](https://laravel.com/)
+- [Filament](https://filamentphp.com/)
+- [Blade Icons](https://github.com/blade-ui-kit/blade-icons)
+- [Feather Icons](https://github.com/brunocfalcao/blade-feather-icons)
