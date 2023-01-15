@@ -31,6 +31,9 @@ class VisitsRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id'),
+                Tables\Columns\TextColumn::make('start_date'),
+                Tables\Columns\TextColumn::make('end_date'),
+                Tables\Columns\TextColumn::make('cave.name'),
             ])
             ->filters([
                 //
