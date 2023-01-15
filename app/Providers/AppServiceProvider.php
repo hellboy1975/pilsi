@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Filament::serving(function () {
             Filament::registerTheme(
-                mix('css/filament.css'),
+                mix('css/pilsi.css'),
             );
 
             Filament::registerNavigationGroups([

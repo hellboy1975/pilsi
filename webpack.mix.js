@@ -19,7 +19,7 @@ mix
         'public/js'
     )
     .postCss(
-        'resources/css/filament.css',
+        'resources/css/pilsi.css',
         'public/css', 
         [
             require('postcss-import'),
