@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TripResource\Pages;
-use App\Filament\Resources\TripResource\RelationManagers;
 use App\Models\Trip;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -11,6 +10,8 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
+
+use App\Filament\Resources\TripResource\RelationManagers\VisitsRelationManager;
 
 class TripResource extends Resource
 {
@@ -81,7 +82,7 @@ class TripResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            VisitsRelationManager::class
         ];
     }
     
