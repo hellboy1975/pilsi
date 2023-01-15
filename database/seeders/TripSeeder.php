@@ -18,11 +18,11 @@ class TripSeeder extends Seeder
         $trips = [
             'name' => 'Squeeze-o-rama 2023!',
             'trip_leader' => 'Joe Caver',
-            'notes' => 'A bunch of cavers from all over South Australia converge on Corra-Luynn Cave, and smash out all the squeezes they can!',
+            'notes' => 'A bunch of cavers from all over South Australia converge on Corra-Lynn Cave, and smash out all the squeezes they can!',
             'user_id' => 1,
             'region_id' => 4,            
-            'start_date' => Carbon::create('2032', '04', '21'),
-            'end_date' => Carbon::create('2032', '04', '22')
+            'start_date' => Carbon::create('2023', '04', '21'),
+            'end_date' => Carbon::create('2023', '04', '22')
         ];
 
         DB::table('trips')->insert($trips);
