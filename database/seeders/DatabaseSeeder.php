@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RegionSeeder::class,
             CaveSeeder::class,
-            SqueezeSeeder::class
+            SqueezeSeeder::class,
+            TripSeeder::class
         ]);
     }
 }
