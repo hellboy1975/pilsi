@@ -2,44 +2,42 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\TripResource\Pages;
-use App\Models\Trip;
+use App\Filament\Resources\VisitResource\Pages;
+use App\Filament\Resources\VisitResource\RelationManagers;
+use App\Models\Visit;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-use App\Filament\Resources\TripResource\RelationManagers\VisitsRelationManager;
-
-class TripResource extends Resource
+class VisitResource extends Resource
 {
-    protected static ?string $model = Trip::class;
+    protected static ?string $model = Visit::class;
+
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     protected static ?string $navigationGroup = 'Data';
 
-    protected static ?string $navigationIcon = 'heroicon-o-trending-up';
-
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255)
-                    ->columnSpan(['default' => 2]),
-                Forms\Components\TextInput::make('trip_leader')
+                Forms\Components\DateTimePicker::make('start_date')
+                    ->required(),
+                Forms\Components\DateTimePicker::make('end_date')
+                    ->required(),
+                Forms\Components\TextInput::make('party_leader')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Select::make('region_id')
-                    ->relationship('region', 'name'),
-                Forms\Components\DatePicker::make('start_date')
-                    ->required(),
-                Forms\Components\DatePicker::make('end_date')
-                    ->required(),
+                Forms\Components\Select::make('trip_id')
+                    ->relationship('trip', 'name'),
+                    Forms\Components\Select::make('cave_id')
+                    ->relationship('cave', 'name'),
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
                     ->label("Added by")
@@ -55,21 +53,21 @@ class TripResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('trip_leader')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('region.name')
-                    ->searchable()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('start_date')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('party_leader')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('cave.name')
+                    ->searchable()
+                    ->sortable(),
+                    Tables\Columns\TextColumn::make('trip.name')
                     ->searchable()
                     ->sortable(),
             ])
             ->filters([
-                SelectFilter::make('region')->relationship('region', 'name')
+                //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -82,16 +80,16 @@ class TripResource extends Resource
     public static function getRelations(): array
     {
         return [
-            VisitsRelationManager::class
+            //
         ];
     }
     
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTrips::route('/'),
-            'create' => Pages\CreateTrip::route('/create'),
-            'edit' => Pages\EditTrip::route('/{record}/edit'),
+            'index' => Pages\ListVisits::route('/'),
+            'create' => Pages\CreateVisit::route('/create'),
+            'edit' => Pages\EditVisit::route('/{record}/edit'),
         ];
     }    
 }

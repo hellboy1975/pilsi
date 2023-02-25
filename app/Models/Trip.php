@@ -5,8 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Region;
 use App\Models\User;
+use App\Models\Visit;
 
 class Trip extends Model
 {
@@ -21,5 +23,10 @@ class Trip extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function visits(): HasMany
+    {
+        return $this->hasMany(Visit::class, 'trip_id');
     }
 }

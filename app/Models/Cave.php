@@ -22,4 +22,9 @@ class Cave extends Model
     {
         return $this->hasMany(Squeeze::class, 'cave_id');
     }
+
+    public function visits(): HasMany
+    {
+        return $this->hasMany(Visit::class, 'cave_id');
+    }
 }
