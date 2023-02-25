@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Resources\CaveResource\RelationManagers\SqueezesRelationManager;
 Use App\Filament\Resources\CaveResource\Pages\ViewCave;
+use App\Filament\Resources\CaveResource\RelationManagers\VisitsRelationManager;
 use Filament\Tables\Actions\Action;
 
 class CaveResource extends Resource
@@ -72,7 +73,8 @@ class CaveResource extends Resource
     public static function getRelations(): array
     {
         return [
-            SqueezesRelationManager::class
+            SqueezesRelationManager::class,
+            VisitsRelationManager::class
         ];
     }
 

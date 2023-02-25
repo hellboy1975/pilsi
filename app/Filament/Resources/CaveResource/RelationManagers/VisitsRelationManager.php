@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\TripResource\RelationManagers;
+namespace App\Filament\Resources\CaveResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -14,7 +14,7 @@ class VisitsRelationManager extends RelationManager
 {
     protected static string $relationship = 'visits';
 
-    protected static ?string $recordTitleAttribute = 'id';
+    protected static ?string $recordTitleAttribute = 'start_date';
 
     public static function form(Form $form): Form
     {
@@ -27,8 +27,8 @@ class VisitsRelationManager extends RelationManager
                 Forms\Components\TextInput::make('party_leader')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Select::make('cave_id')
-                    ->relationship('cave', 'name'),
+                Forms\Components\Select::make('trip_id')
+                    ->relationship('trip', 'name'),
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
                     ->label("Added by")
@@ -50,7 +50,7 @@ class VisitsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('party_leader')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('cave.name')
+                Tables\Columns\TextColumn::make('trip.name')
                     ->searchable()
                     ->sortable(),
             ])
