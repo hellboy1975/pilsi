@@ -11,6 +11,8 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Resources\CaveResource\RelationManagers\SqueezesRelationManager;
+Use App\Filament\Resources\CaveResource\Pages\ViewCave;
+use Filament\Tables\Actions\Action;
 
 class CaveResource extends Resource
 {
@@ -58,6 +60,12 @@ class CaveResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('region')->relationship('region', 'name')
+            ])
+            ->actions([
+                Action::make('view')
+                    ->url(fn (Cave $record): string => route('filament.resources.caves.view', $record)),
+                Action::make('edit')
+                    ->url(fn (Cave $record): string => route('filament.resources.caves.edit', $record))
             ]);
     }
 
@@ -74,6 +82,7 @@ class CaveResource extends Resource
             'index' => Pages\ListCaves::route('/'),
             'create' => Pages\CreateCave::route('/create'),
             'edit' => Pages\EditCave::route('/{record}/edit'),
+            'view' => Pages\ViewCave::route('/{record}'),
         ];
     }
 }
