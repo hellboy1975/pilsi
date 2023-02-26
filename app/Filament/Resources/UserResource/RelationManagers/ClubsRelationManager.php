@@ -35,16 +35,12 @@ class ClubsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                // Tables\Actions\CreateAction::make(),
                 Tables\Actions\AttachAction::make(),
             ])
             ->actions([
-                // Tables\Actions\EditAction::make(),
-                // Tables\Actions\DeleteAction::make(),
                 Tables\Actions\DetachAction::make(),
             ])
             ->bulkActions([
-                // Tables\Actions\DeleteBulkAction::make(),
                 Tables\Actions\DetachBulkAction::make(),
             ]);
     }    
