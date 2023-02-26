@@ -10,6 +10,8 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Resources\Forms\Components\Relationship;
+use Filament\Resources\RelationManagers\RelationManager;
 
 class UserResource extends Resource
 {
@@ -71,7 +73,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\ClubsRelationManager::class,
         ];
     }
 
