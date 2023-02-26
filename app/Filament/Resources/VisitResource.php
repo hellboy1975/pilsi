@@ -17,7 +17,7 @@ class VisitResource extends Resource
 {
     protected static ?string $model = Visit::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $navigationIcon = 'heroicon-o-pencil-alt';
 
     protected static ?string $navigationGroup = 'Data';
 
@@ -62,7 +62,7 @@ class VisitResource extends Resource
                 Tables\Columns\TextColumn::make('cave.name')
                     ->searchable()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('trip.name')
+                Tables\Columns\TextColumn::make('trip.name')
                     ->searchable()
                     ->sortable(),
             ])
