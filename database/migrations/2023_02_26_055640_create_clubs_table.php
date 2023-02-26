@@ -17,6 +17,7 @@ class CreateClubsTable extends Migration
             $table->id();
             $table->string('abbreviation');
             $table->string('name');
+            $table->string('location');
             $table->string('website')->nullable();
             $table->text('about')->nullable();
             $table->string('logo_url')->nullable();
