@@ -17,7 +17,9 @@ class DatabaseSeeder extends Seeder
             RegionSeeder::class,
             CaveSeeder::class,
             SqueezeSeeder::class,
-            TripSeeder::class
+            TripSeeder::class,
+            ClubSeeder::class,
+            VisitSeeder::class
         ]);
     }
 }
