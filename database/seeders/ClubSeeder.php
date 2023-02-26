@@ -26,7 +26,7 @@ class ClubSeeder extends Seeder
                 'abbreviation' => 'FUSSI',
                 'name' => 'Flinders University Speleological Society Incorporated',
                 'location' => 'South Australia',
-                'website' => 'https://www.cegsa.org.au',
+                'website' => 'https://fussi.caves.org.au/',
                 'about' => "We're a club at Flinders University. Members of the general public and the University community are very welcome.<br/>Formed in 1974, the original purpose of Flinders University Speleological Society Inc. was to carry out scientific work at the Naracoorte Caves. Since then FUSSI members have visited many areas other than Naracoorte and undertaken speleological work on the Nullarbor and the Flinders Ranges"
             ],[
                 'abbreviation' => 'SCG',
