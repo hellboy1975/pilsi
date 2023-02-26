@@ -17,21 +17,48 @@ class ClubResource extends Resource
 {
     protected static ?string $model = Club::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+
+    protected static ?string $navigationGroup = 'Data';
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                //
-            ]);
+        ->schema([
+            Forms\Components\TextInput::make('abbreviation')
+                ->required()
+                ->maxLength(25),
+            Forms\Components\TextInput::make('name')
+                ->required()
+                ->maxLength(255),
+            Forms\Components\TextInput::make('location')
+                ->required()
+                ->maxLength(255),
+            Forms\Components\TextInput::make('website')
+                ->maxLength(255),   
+            Forms\Components\RichEditor::make('about')
+                ->required()
+                ->maxLength(255)
+                ->columnSpan(['default' => 2]),
+            Forms\Components\FileUpload::make('logo_url'),
+        ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('abbreviation')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('website')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('location')
+                    ->searchable()
+                    ->sortable()
             ])
             ->filters([
                 //
