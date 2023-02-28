@@ -31,6 +31,8 @@ class AttemptResource extends Resource
                     ->relationship('squeeze', 'name'),
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name'),
+                Forms\Components\Select::make('visit_id')
+                    ->relationship('visit', 'start_date'),
                 Forms\Components\DateTimePicker::make('date')
                     ->required()
                     ->withoutSeconds()
