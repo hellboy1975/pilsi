@@ -80,5 +80,6 @@ This site leverages the following frameworks and libraries:
 
 - [Laravel](https://laravel.com/)
 - [Filament](https://filamentphp.com/)
+- [Filament Shield](https://github.com/bezhanSalleh/filament-shield)
 - [Blade Icons](https://github.com/blade-ui-kit/blade-icons)
 - [Feather Icons](https://github.com/brunocfalcao/blade-feather-icons)
