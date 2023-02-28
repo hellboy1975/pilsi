@@ -50,6 +50,11 @@ class User extends Authenticatable implements HasAvatar
         return $this->hasMany(Squeeze::class, 'user_id');
     }
 
+    public function attempts(): HasMany
+    {
+        return $this->hasMany(Attempt::class, 'attempt_id');
+    }
+
     public function getFilamentAvatarUrl(): ?string
     {
         return $this->avatar_url;
