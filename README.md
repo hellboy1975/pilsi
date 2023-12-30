@@ -46,6 +46,11 @@ You'll probably need to add yourself as a user:
 
     sail artisan make:filament-user
 
+If this is the first time running the site, you'll need to get the frontend ready with
+
+    sail npm install
+    sail npx mix
+
 All things going well, access the site with:
 
 * [Frontend](http://localhost:3000)
