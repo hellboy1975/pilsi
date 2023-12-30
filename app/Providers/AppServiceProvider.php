@@ -32,11 +32,9 @@ class AppServiceProvider extends ServiceProvider
 
             Filament::registerNavigationGroups([
                 NavigationGroup::make()
-                     ->label('Data')
-                     ->icon('heroicon-m-circle-stack'),
+                     ->label('Data'),
                 NavigationGroup::make()
                     ->label('Settings')
-                    ->icon('heroicon-s-cog')
                     ->collapsed(),
             ]);
         });
