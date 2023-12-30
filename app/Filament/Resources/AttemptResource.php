@@ -6,9 +6,9 @@ use App\Filament\Resources\AttemptResource\Pages;
 use App\Filament\Resources\AttemptResource\RelationManagers;
 use App\Models\Attempt;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -17,7 +17,7 @@ class AttemptResource extends Resource
 {
     protected static ?string $model = Attempt::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-upload';
+    protected static ?string $navigationIcon = 'heroicon-o-arrow-up-tray';
 
     protected static ?string $navigationGroup = 'Data';
 
@@ -58,7 +58,7 @@ class AttemptResource extends Resource
                     ->sortable(),
                 Tables\Columns\IconColumn::make('success')
                     ->boolean()
-                    ->trueIcon('heroicon-o-badge-check')
+                    ->trueIcon('heroicon-o-check-badge')
                     ->falseIcon('heroicon-o-x-circle'),
                 Tables\Columns\TextColumn::make('squeeze.name')
                     ->searchable()

@@ -5,9 +5,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\TripResource\Pages;
 use App\Models\Trip;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 
@@ -19,7 +19,7 @@ class TripResource extends Resource
 
     protected static ?string $navigationGroup = 'Data';
 
-    protected static ?string $navigationIcon = 'heroicon-o-trending-up';
+    protected static ?string $navigationIcon = 'heroicon-o-arrow-trending-up';
 
     protected static ?int $navigationSort = 5;
 

@@ -10,7 +10,7 @@ class ListAttempts extends ListRecords
 {
     protected static string $resource = AttemptResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\CreateAction::make(),

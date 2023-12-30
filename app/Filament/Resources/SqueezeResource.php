@@ -7,9 +7,9 @@ use App\Filament\Resources\SqueezeResource\RelationManagers;
 use App\Models\Squeeze;
 use App\Models\User;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -19,7 +19,7 @@ class SqueezeResource extends Resource
 {
     protected static ?string $model = Squeeze::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-inbox-in';
+    protected static ?string $navigationIcon = 'heroicon-o-inbox-arrow-down';
 
     protected static ?string $navigationGroup = 'Data';
 
