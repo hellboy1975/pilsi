@@ -10,7 +10,7 @@ class ListTrips extends ListRecords
 {
     protected static string $resource = TripResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\CreateAction::make(),

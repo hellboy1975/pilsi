@@ -46,17 +46,22 @@ You'll probably need to add yourself as a user:
 
     sail artisan make:filament-user
 
+If this is the first time running the site, you'll need to get the frontend ready with
+
+    sail npm install
+    sail npx mix
+
 All things going well, access the site with:
 
-- [Frontend](http://localhost:3000)
-- [Admin](http://localhost:3000/admin)
+* [Frontend](http://localhost:3000)
+* [Admin](http://localhost:3000/admin)
 
 ### Technical info
 
 I've configured the .env file to use the following ports:
 
-- 3000 for the website
-- 3306 for MySQL
+* 3000 for the website
+* 3306 for MySQL
 
 These are set in the .env file
 
@@ -78,7 +83,7 @@ You can also set it to watch if you fancy:
 
 This site leverages the following frameworks and libraries:
 
-- [Laravel](https://laravel.com/)
-- [Filament](https://filamentphp.com/)
-- [Blade Icons](https://github.com/blade-ui-kit/blade-icons)
-- [Feather Icons](https://github.com/brunocfalcao/blade-feather-icons)
+* [Laravel](https://laravel.com/)
+* [Filament](https://filamentphp.com/)
+* [Blade Icons](https://github.com/blade-ui-kit/blade-icons)
+* [Feather Icons](https://github.com/brunocfalcao/blade-feather-icons)
