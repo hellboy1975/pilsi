@@ -43,7 +43,7 @@
 
                             <div class="ml-12">
                                 <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    v0.1.1 is due for public release sometime before the <i>Secrets of the Nullarbor</i> conference in April 2023.
+                                    v0.1.1 is due for public release sometime in early 2024.
                                 </div>
                             </div>
                         </div>
