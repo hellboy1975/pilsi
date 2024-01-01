@@ -14,4 +14,9 @@ class Region extends Model
     {
         return $this->hasMany(Cave::class, 'region_id');
     }
+
+    public function trips(): HasMany
+    {
+        return $this->hasMany(Trip::class, 'region_id');
+    }
 }
