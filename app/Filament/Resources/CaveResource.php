@@ -64,9 +64,9 @@ class CaveResource extends Resource
             ])
             ->actions([
                 Action::make('view')
-                    ->url(fn (Cave $record): string => route('filament.resources.caves.view', $record)),
+                    ->url(fn (Cave $record): string => route('filament.admin.resources.caves.view', $record)),
                 Action::make('edit')
-                    ->url(fn (Cave $record): string => route('filament.resources.caves.edit', $record))
+                    ->url(fn (Cave $record): string => route('filament.admin.resources.caves.edit', $record))
             ]);
     }
 
