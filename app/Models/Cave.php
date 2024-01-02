@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Cave extends Model
 {
-    protected $fillable = ['name', 'region_id', 'code', 'description'];
+    protected $fillable = ['name', 'region_id', 'code', 'description', 'main_picture'];
 
     use HasFactory;
 

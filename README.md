@@ -79,6 +79,12 @@ You can also set it to watch if you fancy:
 
     sail npx mix watch
 
+### localhost troubleshooting
+
+If you find that images aren't loading propery, it's likely that the public disk filesystem isn't published.  Try the following:
+
+    sail artisan storage:link
+
 ### Credits
 
 This site leverages the following frameworks and libraries:
