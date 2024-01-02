@@ -38,11 +38,13 @@ class ClubResource extends Resource
                 ->maxLength(255),
             Forms\Components\TextInput::make('website')
                 ->maxLength(255),   
-            Forms\Components\RichEditor::make('about')
+            Forms\Components\MarkdownEditor::make('about')
                 ->required()
-                ->maxLength(255)
+                ->maxLength(20000)
                 ->columnSpan(['default' => 2]),
-            Forms\Components\FileUpload::make('logo_url'),
+            Forms\Components\FileUpload::make('logo_url')
+                ->directory('clubPhotos')
+                ->image(),
         ]);
     }
 

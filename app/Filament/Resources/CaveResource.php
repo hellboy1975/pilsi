@@ -13,6 +13,9 @@ use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Resources\CaveResource\RelationManagers\SqueezesRelationManager;
 Use App\Filament\Resources\CaveResource\Pages\ViewCave;
 use App\Filament\Resources\CaveResource\RelationManagers\VisitsRelationManager;
+use Filament\Infolists;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Infolist;
 use Filament\Tables\Actions\Action;
 
 class CaveResource extends Resource
@@ -24,6 +27,18 @@ class CaveResource extends Resource
     protected static ?string $navigationGroup = 'Data';
 
     protected static ?int $navigationSort = 3;
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Infolists\Components\TextEntry::make('name'),
+                Infolists\Components\TextEntry::make('code'),
+                Infolists\Components\TextEntry::make('region.name'),
+                Infolists\Components\ImageEntry::make('main_picture')
+                    ->columnSpan('full')
+        ]);
+    }
 
     public static function form(Form $form): Form
     {
@@ -41,7 +56,17 @@ class CaveResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->columnSpan(['default' => 2]),
-                Forms\Components\FileUpload::make('main_picture'),
+                Forms\Components\FileUpload::make('main_picture')
+                    ->columnSpan('full')
+                    ->directory('cavePhotos')
+                    ->disk('public')
+                    ->image()
+                    ->imageEditor()
+                    ->imageEditorAspectRatios([
+                        '16:9',
+                        '4:3',
+                        '1:1',
+                    ]),
             ]);
     }
 
