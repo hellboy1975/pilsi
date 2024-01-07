@@ -32,7 +32,6 @@ class UserResource extends Resource
                     ->columns([
                         'default' => 1,
                         'xl' => 2,
-                        '2xl' => 2,
                     ])
                     ->schema([
                         TextInput::make('name')

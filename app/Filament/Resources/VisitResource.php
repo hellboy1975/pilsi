@@ -27,9 +27,9 @@ class VisitResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\DateTimePicker::make('start_date')
+                Forms\Components\DatePicker::make('start_date')
                     ->required(),
-                Forms\Components\DateTimePicker::make('end_date')
+                Forms\Components\DatePicker::make('end_date')
                     ->required(),
                 Forms\Components\TextInput::make('party_leader')
                     ->required()

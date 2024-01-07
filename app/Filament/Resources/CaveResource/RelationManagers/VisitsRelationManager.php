@@ -19,10 +19,14 @@ class VisitsRelationManager extends RelationManager
     public function form(Form $form): Form
     {
         return $form
+            ->columns([
+                'default' => 1,
+                'xl' => 2
+            ])
             ->schema([
-                Forms\Components\DateTimePicker::make('start_date')
+                Forms\Components\DatePicker::make('start_date')
                     ->required(),
-                Forms\Components\DateTimePicker::make('end_date')
+                Forms\Components\DatePicker::make('end_date')
                     ->required(),
                 Forms\Components\TextInput::make('party_leader')
                     ->required()
@@ -33,10 +37,10 @@ class VisitsRelationManager extends RelationManager
                     ->relationship('user', 'name')
                     ->label("Added by")
                     ->default(auth()->user()->id),
-                Forms\Components\RichEditor::make('notes')
+                Forms\Components\MarkdownEditor::make('notes')
                     ->required()
                     ->maxLength(255)
-                    ->columnSpan(['default' => 2])
+                    ->columnSpanFull()
             ]);
     }
 
@@ -46,10 +50,12 @@ class VisitsRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('start_date')
                     ->searchable()
+                    ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('party_leader')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->visibleFrom('md'),
                 Tables\Columns\TextColumn::make('trip.name')
                     ->searchable()
                     ->sortable(),
@@ -61,11 +67,8 @@ class VisitsRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\EditAction::make()->iconButton(),
+                Tables\Actions\DeleteAction::make()->iconButton(),
             ]);
     }    
 }

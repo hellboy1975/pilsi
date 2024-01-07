@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Filament\Tables;
+use App\Filament\Forms\Components\LocalisedCountrySelect;
 
 class RegionResource extends Resource
 {
@@ -31,9 +32,8 @@ class RegionResource extends Resource
                 Forms\Components\TextInput::make('code')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('country_code')
-                    ->required()
-                    ->maxLength(2),
+                LocalisedCountrySelect::make('country_code')
+                    ->required(),
                 Forms\Components\RichEditor::make('description')
                     ->required()
                     ->maxLength(255)
