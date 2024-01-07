@@ -45,7 +45,7 @@ class UsersRelationManager extends RelationManager
             ])
             ->actions([
                 // Tables\Actions\EditAction::make(),
-                Tables\Actions\DetachAction::make(),
+                Tables\Actions\DetachAction::make()->iconButton(),
                 // Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
