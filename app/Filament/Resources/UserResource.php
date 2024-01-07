@@ -6,6 +6,7 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
@@ -27,24 +28,39 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('password')
-                    ->password()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('avatar_url')
-                    ->label('Avatar URL')
-                    ->maxLength(255),
-                Forms\Components\RichEditor::make('bio')
-                    ->label("User Biography")
-                    ->maxLength(5000)
-                    ->columnSpan(['default' => 2]),
+                Section::make('User Details')
+                ->columns(2)
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->required()
+                            ->label('Login')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('display_name')
+                            ->required()
+                            ->label('Display Name')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('email')
+                            ->email()
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\FileUpload::make('avatar_url')
+                            ->label('Avatar URL')
+                            ->avatar(),
+                        Forms\Components\MarkdownEditor::make('bio')
+                            ->label("User Biography")
+                            ->maxLength(5000)
+                            ->columnSpan(['default' => 2])
+                    ]),
+                Section::make('Change Password')
+                    ->description('Fill in both fields below to change your password')
+                    ->schema([
+                        Forms\Components\TextInput::make('password')
+                            ->password()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('match_password')
+                            ->password()
+                            ->maxLength(255),
+                    ])->hiddenOn('edit')
             ]);
     }
 
