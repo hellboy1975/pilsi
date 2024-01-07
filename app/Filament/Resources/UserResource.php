@@ -11,6 +11,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Filament\Tables;
+use Filament\Forms\Components\TextInput;
+use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
 {
@@ -29,39 +31,34 @@ class UserResource extends Resource
                 Section::make('User Details')
                 ->columns(2)
                     ->schema([
-                        Forms\Components\TextInput::make('name')
+                        TextInput::make('name')
                             ->required()
                             ->label('Display Name')
                             ->maxLength(255),
-                        Forms\Components\TextInput::make('email')
+                        TextInput::make('email')
                             ->email()
                             ->unique(ignoreRecord: true)
                             ->required()
+                            ->suffixIcon('heroicon-m-at-symbol')
                             ->maxLength(255),
-                        Forms\Components\TextInput::make('new_password')
-                            ->password()
-                            ->required()
-                            ->maxLength(255)
-                            ->hiddenOn('edit'),
                         Forms\Components\FileUpload::make('avatar_url')
-                            ->label('Avatar URL')
-                            ->avatar(),
+                            ->label('Avatar')
+                            ->avatar()
+                            ->imageEditor()
+                            ->circleCropper()
+                            ->directory('avatars'),
                         Forms\Components\MarkdownEditor::make('bio')
                             ->label("User Biography")
                             ->maxLength(5000)
                             ->columnSpan(['default' => 2])
                     ]),
                 Section::make('Change Password')
-                    ->description('Fill in both fields below to change your password')
+                    ->description('To change your password just fill in the form below')
                     ->schema([
-                        Forms\Components\TextInput::make('new_password')
+                        TextInput::make('password')
                             ->password()
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('match_new_password')
-                            ->password()
-                            ->maxLength(255)
-                            ->same('new_password')
-                            ->requiredWith('new_password'),
+                            ->dehydrateStateUsing(fn (string $state): string => Hash::make($state))
+                            ->dehydrated(fn (?string $state): bool => filled($state))
                     ])->hiddenOn('create')
             ]);
     }
