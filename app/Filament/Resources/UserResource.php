@@ -11,8 +11,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Filament\Tables;
-use Filament\Resources\Forms\Components\Relationship;
-use Filament\Resources\RelationManagers\RelationManager;
 
 class UserResource extends Resource
 {
@@ -33,16 +31,18 @@ class UserResource extends Resource
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
-                            ->label('Login')
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('display_name')
-                            ->required()
                             ->label('Display Name')
                             ->maxLength(255),
                         Forms\Components\TextInput::make('email')
                             ->email()
+                            ->unique(ignoreRecord: true)
                             ->required()
                             ->maxLength(255),
+                        Forms\Components\TextInput::make('new_password')
+                            ->password()
+                            ->required()
+                            ->maxLength(255)
+                            ->hiddenOn('edit'),
                         Forms\Components\FileUpload::make('avatar_url')
                             ->label('Avatar URL')
                             ->avatar(),
@@ -54,13 +54,15 @@ class UserResource extends Resource
                 Section::make('Change Password')
                     ->description('Fill in both fields below to change your password')
                     ->schema([
-                        Forms\Components\TextInput::make('password')
+                        Forms\Components\TextInput::make('new_password')
                             ->password()
                             ->maxLength(255),
-                        Forms\Components\TextInput::make('match_password')
+                        Forms\Components\TextInput::make('match_new_password')
                             ->password()
-                            ->maxLength(255),
-                    ])->hiddenOn('edit')
+                            ->maxLength(255)
+                            ->same('new_password')
+                            ->requiredWith('new_password'),
+                    ])->hiddenOn('create')
             ]);
     }
 
