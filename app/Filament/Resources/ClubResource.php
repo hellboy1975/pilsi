@@ -57,8 +57,6 @@ class ClubResource extends Resource
                             ->directory('clubLogos')
                             ->image(),
                     ])
-
-            
         ]);
     }
 
