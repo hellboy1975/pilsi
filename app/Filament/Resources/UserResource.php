@@ -29,7 +29,11 @@ class UserResource extends Resource
         return $form
             ->schema([
                 Section::make('User Details')
-                ->columns(2)
+                    ->columns([
+                        'default' => 1,
+                        'xl' => 2,
+                        '2xl' => 2,
+                    ])
                     ->schema([
                         TextInput::make('name')
                             ->required()
@@ -50,7 +54,7 @@ class UserResource extends Resource
                         Forms\Components\MarkdownEditor::make('bio')
                             ->label("User Biography")
                             ->maxLength(5000)
-                            ->columnSpan(['default' => 2])
+                            ->columnSpanFull()
                     ]),
                 Section::make('Change Password')
                     ->description('To change your password just fill in the form below')
@@ -75,10 +79,12 @@ class UserResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('M j, Y')
-                    ->sortable(),
+                    ->sortable()
+                    ->visibleFrom('md'),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime('M j, Y')
-                    ->sortable(),
+                    ->sortable()
+                    ->visibleFrom('md'),
             ])
             ->filters([
                 //
