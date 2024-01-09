@@ -76,7 +76,7 @@ class TripResource extends Resource
                 SelectFilter::make('region')->relationship('region', 'name')
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->iconButton(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
