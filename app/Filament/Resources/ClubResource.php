@@ -69,7 +69,8 @@ class ClubResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('website')
                     ->searchable()
-                    ->sortable()->visibleFrom('md'),
+                    ->sortable()
+                    ->visibleFrom('md'),
                 Tables\Columns\TextColumn::make('location')
                     ->searchable()
                     ->sortable()
