@@ -28,25 +28,40 @@ class SqueezeResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('pilsi')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Select::make('cave_id')
-                    ->relationship('cave', 'name'),
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'name')
-                    ->label("Added by")
-                    ->default(auth()->user()->id),
-                Forms\Components\RichEditor::make('description')
-                    ->required()
-                    ->maxLength(255)
-                    ->columnSpan(['default' => 2]),
-                Forms\Components\FileUpload::make('main_picture'),
-            ]);
+        ->columns([
+            'default' => 1,
+            'xl' => 2
+        ])
+        ->schema([
+            Forms\Components\Section::make('Squeeze Details')
+                    ->columns([
+                        'default' => 1,
+                        'xl' => 2
+                    ])
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('pilsi')
+                        ->label('PiLSi')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\Select::make('cave_id')
+                            ->relationship('cave', 'name'),
+                        Forms\Components\Select::make('user_id')
+                            ->relationship('user', 'name')
+                            ->label("Added by")
+                            ->default(auth()->user()->id),
+                        Forms\Components\MarkdownEditor::make('description')
+                            ->required()
+                            ->maxLength(255)
+                            ->columnSpanFull(),
+                        Forms\Components\FileUpload::make('main_picture')
+                            ->directory('squeezePhotos')
+                            ->columnSpanFull()
+                            ->image(),
+                        ])
+        ]);
     }
 
     public static function table(Table $table): Table

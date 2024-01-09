@@ -10,6 +10,13 @@ class Region extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'code',
+        'country_code',
+        'description',
+    ];
+
     public function caves(): HasMany
     {
         return $this->hasMany(Cave::class, 'region_id');

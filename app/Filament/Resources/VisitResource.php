@@ -27,9 +27,9 @@ class VisitResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\DateTimePicker::make('start_date')
+                Forms\Components\DatePicker::make('start_date')
                     ->required(),
-                Forms\Components\DateTimePicker::make('end_date')
+                Forms\Components\DatePicker::make('end_date')
                     ->required(),
                 Forms\Components\TextInput::make('party_leader')
                     ->required()
@@ -42,10 +42,10 @@ class VisitResource extends Resource
                     ->relationship('user', 'name')
                     ->label("Added by")
                     ->default(auth()->user()->id),
-                Forms\Components\RichEditor::make('notes')
+                Forms\Components\MarkdownEditor::make('notes')
                     ->required()
                     ->maxLength(255)
-                    ->columnSpan(['default' => 2])
+                    ->columnSpanFull()
             ]);
     }
 
@@ -55,9 +55,7 @@ class VisitResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('start_date')
                     ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('party_leader')
-                    ->searchable()
+                    ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('cave.name')
                     ->searchable()
@@ -65,12 +63,16 @@ class VisitResource extends Resource
                 Tables\Columns\TextColumn::make('trip.name')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('party_leader')
+                    ->searchable()
+                    ->sortable()
+                    ->visibleFrom('md'),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->iconButton(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

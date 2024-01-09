@@ -20,7 +20,7 @@ class UsersRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('display_name')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
@@ -33,7 +33,7 @@ class UsersRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('display_name'),
                 Tables\Columns\TextColumn::make('email'),
             ])
             ->filters([
@@ -45,7 +45,7 @@ class UsersRelationManager extends RelationManager
             ])
             ->actions([
                 // Tables\Actions\EditAction::make(),
-                Tables\Actions\DetachAction::make(),
+                Tables\Actions\DetachAction::make()->iconButton(),
                 // Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

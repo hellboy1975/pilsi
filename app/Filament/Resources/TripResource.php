@@ -30,7 +30,7 @@ class TripResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255)
-                    ->columnSpan(['default' => 2]),
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('trip_leader')
                     ->required()
                     ->maxLength(255),
@@ -47,7 +47,7 @@ class TripResource extends Resource
                 Forms\Components\RichEditor::make('notes')
                     ->required()
                     ->maxLength(255)
-                    ->columnSpan(['default' => 2])
+                    ->columnSpanFull()
             ]);
     }
 
@@ -55,24 +55,28 @@ class TripResource extends Resource
     {
         return $table
             ->columns([
+                
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('trip_leader')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('region.name')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('start_date')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('trip_leader')
+                    ->searchable()
+                    ->sortable()
+                    ->visibleFrom('md'),
+                Tables\Columns\TextColumn::make('region.name')
+                    ->searchable()
+                    ->sortable()
+                    ->visibleFrom('md'),
+                
             ])
             ->filters([
                 SelectFilter::make('region')->relationship('region', 'name')
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->iconButton(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

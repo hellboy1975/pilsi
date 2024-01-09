@@ -11,12 +11,12 @@ use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Resources\CaveResource\RelationManagers\SqueezesRelationManager;
-Use App\Filament\Resources\CaveResource\Pages\ViewCave;
 use App\Filament\Resources\CaveResource\RelationManagers\VisitsRelationManager;
 use Filament\Infolists;
-use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Infolist;
 use Filament\Tables\Actions\Action;
+use Filament\Infolists\Components\Section;
+// use Filament\Forms\Components\Section;
 
 class CaveResource extends Resource
 {
@@ -32,11 +32,19 @@ class CaveResource extends Resource
     {
         return $infolist
             ->schema([
-                Infolists\Components\TextEntry::make('name'),
-                Infolists\Components\TextEntry::make('code'),
-                Infolists\Components\TextEntry::make('region.name'),
-                Infolists\Components\ImageEntry::make('main_picture')
-                    ->columnSpan('full')
+                Infolists\Components\Section::make('Cave details')
+                    ->columns([
+                        'default' => 1,
+                        'xl' => 2
+                    ])
+                    ->schema([
+                        Infolists\Components\TextEntry::make('name'),
+                        Infolists\Components\TextEntry::make('code'),
+                        Infolists\Components\TextEntry::make('region.name'),
+                        Infolists\Components\ImageEntry::make('main_picture')
+                            ->columnSpanFull()
+                    ]),
+                
         ]);
     }
 
@@ -44,29 +52,36 @@ class CaveResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('code')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Select::make('region_id')
-                    ->relationship('region', 'name'),
-                Forms\Components\RichEditor::make('description')
-                    ->required()
-                    ->maxLength(255)
-                    ->columnSpan(['default' => 2]),
-                Forms\Components\FileUpload::make('main_picture')
-                    ->columnSpan('full')
-                    ->directory('cavePhotos')
-                    ->disk('public')
-                    ->image()
-                    ->imageEditor()
-                    ->imageEditorAspectRatios([
-                        '16:9',
-                        '4:3',
-                        '1:1',
-                    ]),
+                Forms\Components\Section::make('Cave Details')
+                    ->columns([
+                        'default' => 1,
+                        'xl' => 2
+                    ])
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('code')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\Select::make('region_id')
+                            ->relationship('region', 'name'),
+                        Forms\Components\RichEditor::make('description')
+                            ->required()
+                            ->maxLength(255)
+                            ->columnSpanFull(),
+                        Forms\Components\FileUpload::make('main_picture')
+                            ->columnSpanFull()
+                            ->directory('cavePhotos')
+                            ->disk('public')
+                            ->image()
+                            ->imageEditor()
+                            ->imageEditorAspectRatios([
+                                '16:9',
+                                '4:3',
+                                '1:1',
+                            ]),
+                        ]),
             ]);
     }
 
@@ -82,16 +97,21 @@ class CaveResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('region.name')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->visibleFrom('md'),
             ])
             ->filters([
                 SelectFilter::make('region')->relationship('region', 'name')
             ])
             ->actions([
                 Action::make('view')
-                    ->url(fn (Cave $record): string => route('filament.admin.resources.caves.view', $record)),
+                    ->url(fn (Cave $record): string => route('filament.admin.resources.caves.view', $record))
+                    ->icon('heroicon-m-eye')
+                    ->iconButton(),
                 Action::make('edit')
                     ->url(fn (Cave $record): string => route('filament.admin.resources.caves.edit', $record))
+                    ->icon('heroicon-m-pencil')
+                    ->iconButton()
             ]);
     }
 

@@ -6,12 +6,13 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Filament\Tables;
-use Filament\Resources\Forms\Components\Relationship;
-use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Forms\Components\TextInput;
+use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
 {
@@ -27,24 +28,41 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('password')
-                    ->password()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('avatar_url')
-                    ->label('Avatar URL')
-                    ->maxLength(255),
-                Forms\Components\RichEditor::make('bio')
-                    ->label("User Biography")
-                    ->maxLength(5000)
-                    ->columnSpan(['default' => 2]),
+                Section::make('User Details')
+                    ->columns([
+                        'default' => 1,
+                        'xl' => 2,
+                    ])
+                    ->schema([
+                        TextInput::make('name')
+                            ->required()
+                            ->label('Display Name')
+                            ->maxLength(255),
+                        TextInput::make('email')
+                            ->email()
+                            ->unique(ignoreRecord: true)
+                            ->required()
+                            ->suffixIcon('heroicon-m-at-symbol')
+                            ->maxLength(255),
+                        Forms\Components\FileUpload::make('avatar_url')
+                            ->label('Avatar')
+                            ->avatar()
+                            ->imageEditor()
+                            ->circleCropper()
+                            ->directory('avatars'),
+                        Forms\Components\MarkdownEditor::make('bio')
+                            ->label("User Biography")
+                            ->maxLength(5000)
+                            ->columnSpanFull()
+                    ]),
+                Section::make('Change Password')
+                    ->description('To change your password just fill in the form below')
+                    ->schema([
+                        TextInput::make('password')
+                            ->password()
+                            ->dehydrateStateUsing(fn (string $state): string => Hash::make($state))
+                            ->dehydrated(fn (?string $state): bool => filled($state))
+                    ])->hiddenOn('create')
             ]);
     }
 
@@ -60,10 +78,12 @@ class UserResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('M j, Y')
-                    ->sortable(),
+                    ->sortable()
+                    ->visibleFrom('md'),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime('M j, Y')
-                    ->sortable(),
+                    ->sortable()
+                    ->visibleFrom('md'),
             ])
             ->filters([
                 //

@@ -26,25 +26,37 @@ class ClubResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
+        ->columns([
+            'default' => 1,
+            'xl' => 2
+        ])
         ->schema([
-            Forms\Components\TextInput::make('abbreviation')
-                ->required()
-                ->maxLength(25),
-            Forms\Components\TextInput::make('name')
-                ->required()
-                ->maxLength(255),
-            Forms\Components\TextInput::make('location')
-                ->required()
-                ->maxLength(255),
-            Forms\Components\TextInput::make('website')
-                ->maxLength(255),   
-            Forms\Components\MarkdownEditor::make('about')
-                ->required()
-                ->maxLength(20000)
-                ->columnSpan(['default' => 2]),
-            Forms\Components\FileUpload::make('logo_url')
-                ->directory('clubPhotos')
-                ->image(),
+            Forms\Components\Section::make('Club Details')
+                    ->columns([
+                        'default' => 1,
+                        'xl' => 2
+                    ])
+                    ->schema([
+                        Forms\Components\TextInput::make('abbreviation')
+                            ->required()
+                            ->maxLength(25),
+                        Forms\Components\TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('location')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('website')
+                            ->suffixIcon('heroicon-m-globe-alt')
+                            ->maxLength(255),   
+                        Forms\Components\MarkdownEditor::make('about')
+                            ->required()
+                            ->maxLength(20000)
+                            ->columnSpanFull(),
+                        Forms\Components\FileUpload::make('logo_url')
+                            ->directory('clubLogos')
+                            ->image(),
+                    ])
         ]);
     }
 
@@ -57,7 +69,8 @@ class ClubResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('website')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->visibleFrom('md'),
                 Tables\Columns\TextColumn::make('location')
                     ->searchable()
                     ->sortable()
@@ -66,7 +79,7 @@ class ClubResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->iconButton(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
