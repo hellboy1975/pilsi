@@ -44,7 +44,7 @@ class AttemptResource extends Resource
                 Forms\Components\RichEditor::make('notes')
                     ->required()
                     ->maxLength(255)
-                    ->columnSpan(['default' => 2]),
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -53,7 +53,7 @@ class AttemptResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('date')
-                    ->datetime('M d, Y')
+                    ->date()
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\IconColumn::make('success')
@@ -74,7 +74,7 @@ class AttemptResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->iconButton(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
