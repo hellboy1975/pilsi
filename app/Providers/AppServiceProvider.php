@@ -26,9 +26,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Filament::serving(function () {
-            Filament::registerTheme(
-                mix('css/pilsi.css'),
-            );
 
             Filament::registerNavigationGroups([
                 NavigationGroup::make()

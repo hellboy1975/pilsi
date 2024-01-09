@@ -49,7 +49,7 @@ You'll probably need to add yourself as a user:
 If this is the first time running the site, you'll need to get the frontend ready with
 
     sail npm install
-    sail npx mix
+    sail npm run dev
 
 All things going well, access the site with:
 
