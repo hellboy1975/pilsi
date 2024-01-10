@@ -6,17 +6,18 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "ext-intl": "*",
         "blade-ui-kit/blade-icons": "*",
         "brunocfalcao/blade-feather-icons": "*",
         "doctrine/dbal": "^3.0",
         "filament/filament": "^3.1",
+        "fly-apps/fly-laravel": "^0.1.7",
         "guzzlehttp/guzzle": "*",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "league/iso3166": "^4.3",
-        "livewire/livewire": "*",
-        "ext-intl": "*"
+        "livewire/livewire": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "*",
