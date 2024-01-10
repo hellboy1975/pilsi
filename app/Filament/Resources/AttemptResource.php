@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\AttemptResource\Pages;
-use App\Filament\Resources\AttemptResource\RelationManagers;
 use App\Models\Attempt;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Table;
 
 class AttemptResource extends Resource
 {
@@ -80,14 +77,14 @@ class AttemptResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -95,5 +92,5 @@ class AttemptResource extends Resource
             'create' => Pages\CreateAttempt::route('/create'),
             'edit' => Pages\EditAttempt::route('/{record}/edit'),
         ];
-    }    
+    }
 }

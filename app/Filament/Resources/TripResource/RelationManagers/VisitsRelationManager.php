@@ -5,10 +5,8 @@ namespace App\Filament\Resources\TripResource\RelationManagers;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Table;
 
 class VisitsRelationManager extends RelationManager
 {
@@ -31,12 +29,12 @@ class VisitsRelationManager extends RelationManager
                     ->relationship('cave', 'name'),
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
-                    ->label("Added by")
+                    ->label('Added by')
                     ->default(auth()->user()->id),
                 Forms\Components\RichEditor::make('notes')
                     ->required()
                     ->maxLength(255)
-                    ->columnSpan(['default' => 2])
+                    ->columnSpan(['default' => 2]),
             ]);
     }
 
@@ -67,5 +65,5 @@ class VisitsRelationManager extends RelationManager
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }    
+    }
 }

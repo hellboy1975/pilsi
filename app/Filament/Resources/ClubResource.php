@@ -8,10 +8,8 @@ use App\Models\Club;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Table;
 
 class ClubResource extends Resource
 {
@@ -26,15 +24,15 @@ class ClubResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-        ->columns([
-            'default' => 1,
-            'xl' => 2
-        ])
-        ->schema([
-            Forms\Components\Section::make('Club Details')
+            ->columns([
+                'default' => 1,
+                'xl' => 2,
+            ])
+            ->schema([
+                Forms\Components\Section::make('Club Details')
                     ->columns([
                         'default' => 1,
-                        'xl' => 2
+                        'xl' => 2,
                     ])
                     ->schema([
                         Forms\Components\TextInput::make('abbreviation')
@@ -48,7 +46,7 @@ class ClubResource extends Resource
                             ->maxLength(255),
                         Forms\Components\TextInput::make('website')
                             ->suffixIcon('heroicon-m-globe-alt')
-                            ->maxLength(255),   
+                            ->maxLength(255),
                         Forms\Components\MarkdownEditor::make('about')
                             ->required()
                             ->maxLength(20000)
@@ -56,8 +54,8 @@ class ClubResource extends Resource
                         Forms\Components\FileUpload::make('logo_url')
                             ->directory('clubLogos')
                             ->image(),
-                    ])
-        ]);
+                    ]),
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -73,7 +71,7 @@ class ClubResource extends Resource
                     ->visibleFrom('md'),
                 Tables\Columns\TextColumn::make('location')
                     ->searchable()
-                    ->sortable()
+                    ->sortable(),
             ])
             ->filters([
                 //
@@ -85,14 +83,14 @@ class ClubResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             RelationManagers\UsersRelationManager::class,
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -100,5 +98,5 @@ class ClubResource extends Resource
             'create' => Pages\CreateClub::route('/create'),
             'edit' => Pages\EditClub::route('/{record}/edit'),
         ];
-    }    
+    }
 }

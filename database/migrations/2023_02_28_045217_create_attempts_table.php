@@ -1,11 +1,11 @@
 <?php
 
+use App\Models\Squeeze;
+use App\Models\User;
+use App\Models\Visit;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\Visit;
-use App\Models\Squeeze;
-use App\Models\User;
 
 class CreateAttemptsTable extends Migration
 {

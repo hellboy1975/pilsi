@@ -35,4 +35,3 @@ class CreateClubsTable extends Migration
         Schema::dropIfExists('clubs');
     }
 }
-

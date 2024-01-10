@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\VisitResource\Pages;
-use App\Filament\Resources\VisitResource\RelationManagers;
 use App\Models\Visit;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Table;
 
 class VisitResource extends Resource
 {
@@ -36,16 +33,16 @@ class VisitResource extends Resource
                     ->maxLength(255),
                 Forms\Components\Select::make('trip_id')
                     ->relationship('trip', 'name'),
-                    Forms\Components\Select::make('cave_id')
+                Forms\Components\Select::make('cave_id')
                     ->relationship('cave', 'name'),
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
-                    ->label("Added by")
+                    ->label('Added by')
                     ->default(auth()->user()->id),
                 Forms\Components\MarkdownEditor::make('notes')
                     ->required()
                     ->maxLength(255)
-                    ->columnSpanFull()
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -78,14 +75,14 @@ class VisitResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -93,5 +90,5 @@ class VisitResource extends Resource
             'create' => Pages\CreateVisit::route('/create'),
             'edit' => Pages\EditVisit::route('/{record}/edit'),
         ];
-    }    
+    }
 }
