@@ -3,19 +3,19 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CaveResource\Pages;
+use App\Filament\Resources\CaveResource\RelationManagers\SqueezesRelationManager;
+use App\Filament\Resources\CaveResource\RelationManagers\VisitsRelationManager;
 use App\Models\Cave;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables\Table;
-use Filament\Tables;
-use Filament\Tables\Filters\SelectFilter;
-use App\Filament\Resources\CaveResource\RelationManagers\SqueezesRelationManager;
-use App\Filament\Resources\CaveResource\RelationManagers\VisitsRelationManager;
 use Filament\Infolists;
 use Filament\Infolists\Infolist;
+use Filament\Resources\Resource;
+use Filament\Tables;
 use Filament\Tables\Actions\Action;
-use Filament\Infolists\Components\Section;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Table;
+
 // use Filament\Forms\Components\Section;
 
 class CaveResource extends Resource
@@ -35,17 +35,17 @@ class CaveResource extends Resource
                 Infolists\Components\Section::make('Cave details')
                     ->columns([
                         'default' => 1,
-                        'xl' => 2
+                        'xl' => 2,
                     ])
                     ->schema([
                         Infolists\Components\TextEntry::make('name'),
                         Infolists\Components\TextEntry::make('code'),
                         Infolists\Components\TextEntry::make('region.name'),
                         Infolists\Components\ImageEntry::make('main_picture')
-                            ->columnSpanFull()
+                            ->columnSpanFull(),
                     ]),
-                
-        ]);
+
+            ]);
     }
 
     public static function form(Form $form): Form
@@ -55,7 +55,7 @@ class CaveResource extends Resource
                 Forms\Components\Section::make('Cave Details')
                     ->columns([
                         'default' => 1,
-                        'xl' => 2
+                        'xl' => 2,
                     ])
                     ->schema([
                         Forms\Components\TextInput::make('name')
@@ -81,7 +81,7 @@ class CaveResource extends Resource
                                 '4:3',
                                 '1:1',
                             ]),
-                        ]),
+                    ]),
             ]);
     }
 
@@ -101,7 +101,7 @@ class CaveResource extends Resource
                     ->visibleFrom('md'),
             ])
             ->filters([
-                SelectFilter::make('region')->relationship('region', 'name')
+                SelectFilter::make('region')->relationship('region', 'name'),
             ])
             ->actions([
                 Action::make('view')
@@ -111,7 +111,7 @@ class CaveResource extends Resource
                 Action::make('edit')
                     ->url(fn (Cave $record): string => route('filament.admin.resources.caves.edit', $record))
                     ->icon('heroicon-m-pencil')
-                    ->iconButton()
+                    ->iconButton(),
             ]);
     }
 
@@ -119,7 +119,7 @@ class CaveResource extends Resource
     {
         return [
             SqueezesRelationManager::class,
-            VisitsRelationManager::class
+            VisitsRelationManager::class,
         ];
     }
 

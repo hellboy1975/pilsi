@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Cave;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Squeeze extends Model
 {
     protected $fillable = ['name', 'cave_id', 'pilsi', 'description', 'user_id'];
+
     use HasFactory;
 
     public function cave(): BelongsTo

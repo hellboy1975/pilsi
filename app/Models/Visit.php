@@ -6,10 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-use App\Models\Trip;
-use App\Models\Cave;
-use App\Models\User;
-
 class Visit extends Model
 {
     protected $fillable = ['notes', 'start_date', 'end_date', 'duration', 'party_leader', 'party_leader_id', 'trip_id', 'cave_id', 'user_id'];

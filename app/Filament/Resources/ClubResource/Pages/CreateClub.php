@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\ClubResource\Pages;
 
 use App\Filament\Resources\ClubResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateClub extends CreateRecord

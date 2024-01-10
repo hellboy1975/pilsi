@@ -2,15 +2,15 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Forms\Components\LocalisedCountrySelect;
 use App\Filament\Resources\RegionResource\Pages;
 use App\Filament\Resources\RegionResource\RelationManagers;
 use App\Models\Region;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
-use App\Filament\Forms\Components\LocalisedCountrySelect;
+use Filament\Tables\Table;
 
 class RegionResource extends Resource
 {
@@ -60,7 +60,7 @@ class RegionResource extends Resource
     {
         return [
             RelationManagers\CavesRelationManager::class,
-            RelationManagers\TripsRelationManager::class
+            RelationManagers\TripsRelationManager::class,
         ];
     }
 

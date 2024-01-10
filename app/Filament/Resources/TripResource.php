@@ -3,15 +3,14 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TripResource\Pages;
+use App\Filament\Resources\TripResource\RelationManagers\VisitsRelationManager;
 use App\Models\Trip;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
-
-use App\Filament\Resources\TripResource\RelationManagers\VisitsRelationManager;
+use Filament\Tables\Table;
 
 class TripResource extends Resource
 {
@@ -42,12 +41,12 @@ class TripResource extends Resource
                     ->required(),
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
-                    ->label("Added by")
+                    ->label('Added by')
                     ->default(auth()->user()->id),
                 Forms\Components\RichEditor::make('notes')
                     ->required()
                     ->maxLength(255)
-                    ->columnSpanFull()
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -55,7 +54,7 @@ class TripResource extends Resource
     {
         return $table
             ->columns([
-                
+
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
@@ -70,10 +69,10 @@ class TripResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->visibleFrom('md'),
-                
+
             ])
             ->filters([
-                SelectFilter::make('region')->relationship('region', 'name')
+                SelectFilter::make('region')->relationship('region', 'name'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->iconButton(),
@@ -82,14 +81,14 @@ class TripResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
-            VisitsRelationManager::class
+            VisitsRelationManager::class,
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -97,5 +96,5 @@ class TripResource extends Resource
             'create' => Pages\CreateTrip::route('/create'),
             'edit' => Pages\EditTrip::route('/{record}/edit'),
         ];
-    }    
+    }
 }

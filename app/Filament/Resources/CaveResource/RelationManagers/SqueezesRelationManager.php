@@ -3,14 +3,10 @@
 namespace App\Filament\Resources\CaveResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Forms\Components\BelongsToSelect;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Table;
 
 class SqueezesRelationManager extends RelationManager
 {
@@ -58,5 +54,5 @@ class SqueezesRelationManager extends RelationManager
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }    
+    }
 }

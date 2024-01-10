@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\SqueezeResource\Pages;
 
 use App\Filament\Resources\SqueezeResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateSqueeze extends CreateRecord

@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             SqueezeSeeder::class,
             TripSeeder::class,
             ClubSeeder::class,
-            VisitSeeder::class
+            VisitSeeder::class,
         ]);
     }
 }

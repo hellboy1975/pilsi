@@ -5,10 +5,8 @@ namespace App\Filament\Resources\CaveResource\RelationManagers;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Table;
 
 class VisitsRelationManager extends RelationManager
 {
@@ -21,7 +19,7 @@ class VisitsRelationManager extends RelationManager
         return $form
             ->columns([
                 'default' => 1,
-                'xl' => 2
+                'xl' => 2,
             ])
             ->schema([
                 Forms\Components\DatePicker::make('start_date')
@@ -35,12 +33,12 @@ class VisitsRelationManager extends RelationManager
                     ->relationship('trip', 'name'),
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
-                    ->label("Added by")
+                    ->label('Added by')
                     ->default(auth()->user()->id),
                 Forms\Components\MarkdownEditor::make('notes')
                     ->required()
                     ->maxLength(255)
-                    ->columnSpanFull()
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -70,5 +68,5 @@ class VisitsRelationManager extends RelationManager
                 Tables\Actions\EditAction::make()->iconButton(),
                 Tables\Actions\DeleteAction::make()->iconButton(),
             ]);
-    }    
+    }
 }

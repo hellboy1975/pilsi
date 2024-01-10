@@ -7,11 +7,11 @@ use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
-use Filament\Forms\Components\TextInput;
+use Filament\Tables\Table;
 use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
@@ -51,9 +51,9 @@ class UserResource extends Resource
                             ->circleCropper()
                             ->directory('avatars'),
                         Forms\Components\MarkdownEditor::make('bio')
-                            ->label("User Biography")
+                            ->label('User Biography')
                             ->maxLength(5000)
-                            ->columnSpanFull()
+                            ->columnSpanFull(),
                     ]),
                 Section::make('Change Password')
                     ->description('To change your password just fill in the form below')
@@ -61,8 +61,8 @@ class UserResource extends Resource
                         TextInput::make('password')
                             ->password()
                             ->dehydrateStateUsing(fn (string $state): string => Hash::make($state))
-                            ->dehydrated(fn (?string $state): bool => filled($state))
-                    ])->hiddenOn('create')
+                            ->dehydrated(fn (?string $state): bool => filled($state)),
+                    ])->hiddenOn('create'),
             ]);
     }
 

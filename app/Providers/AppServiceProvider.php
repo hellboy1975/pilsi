@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Filament\Facades\Filament;
 use Filament\Navigation\NavigationGroup;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
 
             Filament::registerNavigationGroups([
                 NavigationGroup::make()
-                     ->label('Data'),
+                    ->label('Data'),
                 NavigationGroup::make()
                     ->label('Settings')
                     ->collapsed(),

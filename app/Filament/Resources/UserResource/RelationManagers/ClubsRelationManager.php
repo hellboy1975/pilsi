@@ -5,10 +5,8 @@ namespace App\Filament\Resources\UserResource\RelationManagers;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Table;
 
 class ClubsRelationManager extends RelationManager
 {
@@ -43,5 +41,5 @@ class ClubsRelationManager extends RelationManager
             ->bulkActions([
                 Tables\Actions\DetachBulkAction::make(),
             ]);
-    }    
+    }
 }

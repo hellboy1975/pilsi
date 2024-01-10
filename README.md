@@ -71,13 +71,17 @@ You can start the application with:
 
     sail up -d
 
-*Laravel Mix* is used to build the css and js.  You can do this with:
+*Laravel Vite* is used to build the css and js.  You can do this with:
 
-    sail npx mix
+    sail npm run build
 
 You can also set it to watch if you fancy:
 
-    sail npx mix watch
+    sail npm run dev
+
+[Laravel Pint](https://laravel.com/docs/10.x/pint) is installed so you can use this tool to tidy up your code after you've mangled it:
+
+    sail pint
 
 ### localhost troubleshooting
 

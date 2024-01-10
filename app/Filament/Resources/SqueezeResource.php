@@ -3,17 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\SqueezeResource\Pages;
-use App\Filament\Resources\SqueezeResource\RelationManagers;
 use App\Models\Squeeze;
-use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-
+use Filament\Tables\Table;
 
 class SqueezeResource extends Resource
 {
@@ -28,29 +23,29 @@ class SqueezeResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-        ->columns([
-            'default' => 1,
-            'xl' => 2
-        ])
-        ->schema([
-            Forms\Components\Section::make('Squeeze Details')
+            ->columns([
+                'default' => 1,
+                'xl' => 2,
+            ])
+            ->schema([
+                Forms\Components\Section::make('Squeeze Details')
                     ->columns([
                         'default' => 1,
-                        'xl' => 2
+                        'xl' => 2,
                     ])
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
                             ->maxLength(255),
                         Forms\Components\TextInput::make('pilsi')
-                        ->label('PiLSi')
+                            ->label('PiLSi')
                             ->required()
                             ->maxLength(255),
                         Forms\Components\Select::make('cave_id')
                             ->relationship('cave', 'name'),
                         Forms\Components\Select::make('user_id')
                             ->relationship('user', 'name')
-                            ->label("Added by")
+                            ->label('Added by')
                             ->default(auth()->user()->id),
                         Forms\Components\MarkdownEditor::make('description')
                             ->required()
@@ -60,8 +55,8 @@ class SqueezeResource extends Resource
                             ->directory('squeezePhotos')
                             ->columnSpanFull()
                             ->image(),
-                        ])
-        ]);
+                    ]),
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -88,14 +83,14 @@ class SqueezeResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -103,5 +98,5 @@ class SqueezeResource extends Resource
             'create' => Pages\CreateSqueeze::route('/create'),
             'edit' => Pages\EditSqueeze::route('/{record}/edit'),
         ];
-    }    
+    }
 }
