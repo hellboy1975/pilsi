@@ -5,11 +5,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
-
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -52,13 +50,14 @@ class UserResource extends Resource
                             ->imageEditor()
                             ->circleCropper()
                             ->directory('avatars'),
+                        Forms\Components\Select::make('roles')
+                            ->multiple()
+                            ->relationship('roles', 'name'),
                         Forms\Components\MarkdownEditor::make('bio')
                             ->label('User Biography')
                             ->maxLength(5000)
                             ->columnSpanFull(),
-                        Forms\Components\Select::make('roles')
-                            ->multiple()
-                            ->relationship('roles', 'name')
+                        
                     ]),
                 Section::make('Change Password')
                     ->description('To change your password just fill in the form below')
