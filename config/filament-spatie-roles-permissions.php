@@ -42,8 +42,8 @@ return [
      * Icons to use for navigation
      */
     'icons' => [
-        'role_navigation' => 'heroicon-o-lock-closed',
-        'permission_navigation' => 'heroicon-o-lock-closed',
+        'role_navigation' => 'heroicon-o-finger-print',
+        'permission_navigation' => 'heroicon-o-key',
     ],
 
     'generator' => [
