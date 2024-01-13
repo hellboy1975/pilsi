@@ -2,21 +2,21 @@
 
 namespace App\Models;
 
+use Althinect\FilamentSpatieRolesPermissions\Concerns\HasSuperAdmin;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Filament\Panel;
 use Spatie\Permission\Traits\HasRoles;
-use Althinect\FilamentSpatieRolesPermissions\Concerns\HasSuperAdmin;
 
-class User extends Authenticatable implements HasAvatar, FilamentUser
+class User extends Authenticatable implements FilamentUser, HasAvatar
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasSuperAdmin;
+    use HasApiTokens, HasFactory, HasRoles, HasSuperAdmin, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -75,16 +75,9 @@ class User extends Authenticatable implements HasAvatar, FilamentUser
     public function canAccessPanel(Panel $panel): bool
     {
         if ($panel->getId() === 'admin') {
-            return str_ends_with($this->email, '@pilsi.info');
+            // return str_ends_with($this->email, '@pilsi.info');
         }
- 
+
         return true;
     }
-
-    // public function getMorphClass()
-    // {
-    //     return 'users';
-    // }
-
-
 }
