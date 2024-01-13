@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('avatar_url')->nullable();
             $table->text('bio')->nullable();
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 

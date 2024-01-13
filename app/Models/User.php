@@ -11,10 +11,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Filament\Panel;
+use Spatie\Permission\Traits\HasRoles;
+use Althinect\FilamentSpatieRolesPermissions\Concerns\HasSuperAdmin;
 
 class User extends Authenticatable implements HasAvatar, FilamentUser
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasSuperAdmin;
 
     /**
      * The attributes that are mass assignable.
@@ -28,6 +30,7 @@ class User extends Authenticatable implements HasAvatar, FilamentUser
         'display_name',
         'avatar_url',
         'bio',
+        'roles',
     ];
 
     /**
@@ -77,4 +80,11 @@ class User extends Authenticatable implements HasAvatar, FilamentUser
  
         return true;
     }
+
+    // public function getMorphClass()
+    // {
+    //     return 'users';
+    // }
+
+
 }
