@@ -12,6 +12,7 @@
         "brunocfalcao/blade-feather-icons": "*",
         "doctrine/dbal": "^3.0",
         "filament/filament": "^3.1",
+        "fly-apps/fly-laravel": "^0.1.7",
         "guzzlehttp/guzzle": "*",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.3",
