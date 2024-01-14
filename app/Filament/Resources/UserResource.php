@@ -57,7 +57,7 @@ class UserResource extends Resource
                             ->label('User Biography')
                             ->maxLength(5000)
                             ->columnSpanFull(),
-                        
+
                     ]),
                 Section::make('Change Password')
                     ->description('To change your password just fill in the form below')
