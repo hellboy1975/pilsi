@@ -1,67 +1,178 @@
 <x-page-header/>
-<body>
-    <x-page-menu/>   
+<body class="text-gray-700 bg-white" style="font-family: 'Source Sans Pro', sans-serif">
+<nav>
+      <div class="container mx-auto px-6 py-2 flex justify-between items-center">
+        <a class="font-bold text-2xl lg:text-4xl" href="#">
+          PiLSi
+        </a>
+        <div class="block lg:hidden">
+          <button class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-800 hover:border-teal-500 appearance-none focus:outline-none">
+            <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <title>Menu</title>
+              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+            </svg>
+          </button>
+        </div>
+        <div class="hidden lg:block">
+          <ul class="inline-flex">
+            <li><a class="px-4 font-bold" href="/">Home</a></li>
+            <li><a class="px-4 hover:text-gray-800" href="#about">About</a></li>
+            <li><a class="px-4 hover:text-gray-800" href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-    <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="flex justify-center pt-8 sm:pt-0">
-                    <img src="{{URL::asset('/images/PiLSi-logo.png') }}" alt="PiLSI logo">
-                </div>
+    <section style="background-color: #2a2b38">
+      <div class="container mx-auto px-6 text-center py-20">
+        <h2 class="mb-6 text-4xl font-bold text-center text-white">
+          Coming soon
+        </h2>
+        <div class="flex justify-center pt-8 sm:pt-0">
+            <img src="{{URL::asset('/images/PiLSi-logo.png') }}" alt="PiLSI logo">
+        </div>
+      </div>
+    </section>
 
-                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                    <div class="grid grid-cols-1 md:grid-cols-2">
-                        <div class="p-6">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="about" class="underline text-gray-900 dark:text-white">About</a></div>
-                            </div>
+    <div class="space-y-4">
+  <details
+    class="group border-s-4 border-green-500 bg-gray-50 p-6 [&_summary::-webkit-details-marker]:hidden"
+    open
+  >
+    <summary class="flex cursor-pointer items-center justify-between gap-1.5">
+      <h2 class="text-lg font-medium text-gray-900">
+        What is PiLSi?
+      </h2>
 
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    PiLSI is an easy to understand and simple to implement index used to rate cave squeezes.  The rating describes the difficulty (between 1-15) and structure (eg. C for Corkscrew) of the sqeeze.
-                                </div>
-                            </div>
-                        </div>
+      <span class="shrink-0 rounded-full bg-white p-1.5 text-gray-900 sm:p-3">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 shrink-0 transition duration-300 group-open:-rotate-45"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </span>
+    </summary>
 
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="/contact" class="underline text-gray-900 dark:text-white">Access</a></div>
-                            </div>
+    <p class="mt-4 leading-relaxed text-gray-700">
+    <a id="about"></a>
+    A squeeze is a passage or element of a cave that requires careful consideration or planning of body positioning and movement to pass through.
+    </p>
 
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Currently access to PiLSI is limited to invite only.  To request one, use the <a href="{{route('contact')}}" class="underline">contact</a> form.
-                                </div>
-                            </div>
-                        </div>
+    <p class="mt-4 leading-relaxed text-gray-700">
+    Utilising the Pilkington-Lewis Squeeze Index (PiLSI) cave constrictions can be rated similarly to the climbing grades used by rock climbers.
+    </p>
+  </details>
 
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="updates" class="underline text-gray-900 dark:text-white">Latest update</a></div>
-                            </div>
+  <details
+    class="group border-s-4 border-green-500 bg-gray-50 p-6 [&_summary::-webkit-details-marker]:hidden"
+  >
+    <summary class="flex cursor-pointer items-center justify-between gap-1.5">
+      <h2 class="text-lg font-medium text-gray-900">
+        So what's this website about then?
+      </h2>
 
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    v0.1.1 is due for public release sometime in early 2024.
-                                </div>
-                            </div>
-                        </div>
+      <span class="shrink-0 rounded-full bg-white p-1.5 text-gray-900 sm:p-3">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 shrink-0 transition duration-300 group-open:-rotate-45"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </span>
+    </summary>
 
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
-                            <div class="flex items-center">
-                                <x-feathericon-github width="24" height="24" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"/>
+    <p class="mt-4 leading-relaxed text-gray-700">
+      The aim of this website is to allow you to document you favourite squeezes, and help develop this tool as a useful one for cavers.
+    </p>
+  </details>
 
-                                <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">Open Source</div>
-                            </div>
+  <details
+    class="group border-s-4 border-green-500 bg-gray-50 p-6 [&_summary::-webkit-details-marker]:hidden"
+  >
+    <summary class="flex cursor-pointer items-center justify-between gap-1.5">
+      <h2 class="text-lg font-medium text-gray-900">
+        What does PiLSi mean?
+      </h2>
 
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    The app used to drive PiLSI is Open Source, and can be rolled out on an environment of your choice.   See our <a href="https://github.com/hellboy1975/pilsi" class="underline">Github</a> page for more details.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <span class="shrink-0 rounded-full bg-white p-1.5 text-gray-900 sm:p-3">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 shrink-0 transition duration-300 group-open:-rotate-45"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </span>
+    </summary>
+
+    <p class="mt-4 leading-relaxed text-gray-700">
+    The PiLSI is named after prominent South Australian cavers Graham Pilkington and Ian Lewis.
+    </p>
+  </details>
+</div>
+
+<section style="background-color: #2a2b38">
+  <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
+      <div class="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
+        <img
+          alt="Squeeze"
+          src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+          class="absolute inset-0 h-full w-full object-cover"
+        />
+        <img src="{{URL::asset('/images/wedding-cake-squeeze.png') }}" alt="Wedding Cake Squeeze.  Photo: Joel Dillon" class="absolute inset-0 h-full w-full object-cover">
+      </div>
+
+      <div class="lg:py-24">
+        <h2 class="text-3xl font-bold sm:text-4xl text-white">Want to get involved?</h2>
+
+        <p class="mt-4 text-white">
+        <a id="contact"></a>
+          This site is currently in a closed alpha.  Access is via invite only at his point, but you can always checkout the site on Github and get in touch if you're super keen.
+        </p>
+
+        <a
+          href="https://github.com/hellboy1975/pilsi"
+          class="mt-8 inline-block rounded bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400"
+        >
+          Check out the Github
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-gray-50">
+  <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="sm:flex sm:items-center sm:justify-between">
+
+      <p class="mt-4 text-center text-sm text-gray-500 lg:mt-0 lg:text-right">
+        Copyright &copy; 2024. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
