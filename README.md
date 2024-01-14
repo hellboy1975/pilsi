@@ -1,6 +1,6 @@
 <p align="center">
 
-![title](pilsi-logo.png "Pilkington-Lewis Squeeze Index")
+![title](PiLSi-logo.png "Pilkington-Lewis Squeeze Index")
 
 </p>
 
