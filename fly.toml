@@ -26,6 +26,8 @@ SESSION_SECURE_COOKIE = true
 DB_CONNECTION = "mysql"
 DB_HOST = "pilsi-staging-mysql.internal"
 DB_DATABASE = "pilsi-staging"
+REDIS_HOST= "fly-redis-pilsi-staging.internal"
+CACHE_DRIVER= "redis"
 
 [experimental]
 auto_rollback = true
