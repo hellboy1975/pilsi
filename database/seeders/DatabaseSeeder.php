@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             TripSeeder::class,
             ClubSeeder::class,
             VisitSeeder::class,
+            RolesAndPermissionsSeeder::class,
         ]);
     }
 }
