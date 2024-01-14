@@ -50,10 +50,14 @@ class UserResource extends Resource
                             ->imageEditor()
                             ->circleCropper()
                             ->directory('avatars'),
+                        Forms\Components\Select::make('roles')
+                            ->multiple()
+                            ->relationship('roles', 'name'),
                         Forms\Components\MarkdownEditor::make('bio')
                             ->label('User Biography')
                             ->maxLength(5000)
                             ->columnSpanFull(),
+
                     ]),
                 Section::make('Change Password')
                     ->description('To change your password just fill in the form below')
