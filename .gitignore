@@ -20,3 +20,6 @@ yarn-error.log
 /public/vendor
 public/js/app.js.LICENSE.txt
 /machines/fly-redis
+
+/public/css
+/public/js
