@@ -28,6 +28,8 @@ DB_HOST = "pilsi-staging-mysql.internal"
 DB_DATABASE = "pilsi-staging"
 CACHE_DRIVER = "redis"
 REDIS_HOST = "pilsi-staging-redis.internal"
+APP_EMAIL_DOMAIN = "@pilsi.xyz"
+
 
 [experimental]
 auto_rollback = true
