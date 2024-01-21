@@ -1,4 +1,4 @@
-#fly.toml app configuration auto-generated on 2024-01-10 12:03:31
+#fly.toml app configuration auto-generated on 2024-01-21 06:43:40
 #
 #See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -21,13 +21,13 @@ APP_ENV = "production"
 LOG_CHANNEL = "stderr"
 LOG_LEVEL = "info"
 LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
-SESSION_DRIVER = "cookie"
+SESSION_DRIVER = "redis"
 SESSION_SECURE_COOKIE = true
 DB_CONNECTION = "mysql"
 DB_HOST = "pilsi-staging-mysql.internal"
 DB_DATABASE = "pilsi-staging"
-REDIS_HOST= "fly-redis-pilsi-staging.internal"
-CACHE_DRIVER= "redis"
+CACHE_DRIVER = "redis"
+REDIS_HOST = "pilsi-staging-redis.internal"
 
 [experimental]
 auto_rollback = true
