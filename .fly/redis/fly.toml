@@ -1,0 +1,19 @@
+#fly.toml app configuration auto-generated on 2024-01-21 06:43:40
+#
+#See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+app = "pilsi-staging-redis"
+primary_region = "syd"
+
+[mounts]
+source = "pilsi_staging_redisdata"
+destination = "/data"
+
+[build]
+image = "flyio/redis:6.2.6"
+
+[http_service]
+internal_port = 6379
+force_https = true
+auto_stop_machines = false
+auto_start_machines = false
