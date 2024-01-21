@@ -19,3 +19,7 @@ yarn-error.log
 /public/build/manifest.json
 /public/vendor
 public/js/app.js.LICENSE.txt
+/machines/fly-redis
+
+/public/css/filament
+/public/js/filament
