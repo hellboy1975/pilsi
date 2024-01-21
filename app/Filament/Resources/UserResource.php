@@ -74,6 +74,8 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('avatar')
+                    ->visibleFrom('md'),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
@@ -81,10 +83,6 @@ class UserResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime('M j, Y')
-                    ->sortable()
-                    ->visibleFrom('md'),
-                Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime('M j, Y')
                     ->sortable()
                     ->visibleFrom('md'),
