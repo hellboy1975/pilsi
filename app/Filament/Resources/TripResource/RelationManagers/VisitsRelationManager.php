@@ -18,9 +18,9 @@ class VisitsRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\DateTimePicker::make('start_date')
+                Forms\Components\DatePicker::make('start_date')
                     ->required(),
-                Forms\Components\DateTimePicker::make('end_date')
+                Forms\Components\DatePicker::make('end_date')
                     ->required(),
                 Forms\Components\TextInput::make('party_leader')
                     ->required()
@@ -31,10 +31,10 @@ class VisitsRelationManager extends RelationManager
                     ->relationship('user', 'name')
                     ->label('Added by')
                     ->default(auth()->user()->id),
-                Forms\Components\RichEditor::make('notes')
+                Forms\Components\MarkdownEditor::make('notes')
                     ->required()
                     ->maxLength(255)
-                    ->columnSpan(['default' => 2]),
+                    ->columnSpanFull(),
             ]);
     }
 
