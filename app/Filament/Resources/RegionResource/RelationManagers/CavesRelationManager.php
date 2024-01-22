@@ -24,10 +24,10 @@ class CavesRelationManager extends RelationManager
                 Forms\Components\TextInput::make('code')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\RichEditor::make('description')
+                Forms\Components\MarkdownEditor::make('description')
                     ->required()
                     ->maxLength(255)
-                    ->columnSpan(['default' => 1]),
+                    ->columnSpanFull(),
             ]);
     }
 
