@@ -13,7 +13,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Hash;
-
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
@@ -44,12 +43,6 @@ class UserResource extends Resource
                             ->required()
                             ->suffixIcon('heroicon-m-at-symbol')
                             ->maxLength(255),
-                        Forms\Components\FileUpload::make('avatar_url')
-                            ->label('Avatar')
-                            ->avatar()
-                            ->imageEditor()
-                            ->circleCropper()
-                            ->directory('avatars'),
                         Forms\Components\Select::make('roles')
                             ->multiple()
                             ->relationship('roles', 'name'),
