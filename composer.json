@@ -15,6 +15,7 @@
         "filament/filament": "^3.2",
         "fly-apps/fly-laravel": "^0.1.7",
         "guzzlehttp/guzzle": "*",
+        "jeffgreco13/filament-breezy": "^2.2",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
