@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\SqueezeResource\Pages;
+use App\Filament\Resources\SqueezeResource\RelationManagers\AttemptsRelationManager;
 use App\Models\Squeeze;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -19,6 +20,14 @@ class SqueezeResource extends Resource
     protected static ?string $navigationGroup = 'Data';
 
     protected static ?int $navigationSort = 4;
+
+    /**
+     * Get the navigation badge for the resource.
+     */
+    public static function getNavigationBadge(): ?string
+    {
+        return number_format(static::getModel()::count());
+    }
 
     public static function form(Form $form): Form
     {
@@ -87,7 +96,7 @@ class SqueezeResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            AttemptsRelationManager::class,
         ];
     }
 

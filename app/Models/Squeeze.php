@@ -25,6 +25,6 @@ class Squeeze extends Model
 
     public function attempts(): HasMany
     {
-        return $this->hasMany(Attempt::class, 'attempt_id');
+        return $this->hasMany(Attempt::class, 'squeeze_id');
     }
 }
