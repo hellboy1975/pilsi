@@ -44,12 +44,6 @@ class UserResource extends Resource
                             ->required()
                             ->suffixIcon('heroicon-m-at-symbol')
                             ->maxLength(255),
-                        Forms\Components\FileUpload::make('avatar_url')
-                            ->label('Avatar')
-                            ->avatar()
-                            ->imageEditor()
-                            ->circleCropper()
-                            ->directory('avatars'),
                         Forms\Components\Select::make('roles')
                             ->multiple()
                             ->relationship('roles', 'name'),
@@ -70,12 +64,12 @@ class UserResource extends Resource
             ]);
     }
 
+    
+
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('avatar')
-                    ->visibleFrom('md'),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
