@@ -16,7 +16,7 @@ class TripResource extends Resource
 {
     protected static ?string $model = Trip::class;
 
-    protected static ?string $navigationGroup = 'Data';
+    protected static ?string $navigationGroup = 'Manage';
 
     protected static ?string $navigationIcon = 'heroicon-o-arrow-trending-up';
 

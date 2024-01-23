@@ -16,7 +16,7 @@ class VisitResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-pencil-square';
 
-    protected static ?string $navigationGroup = 'Data';
+    protected static ?string $navigationGroup = 'Manage';
 
     protected static ?int $navigationSort = 6;
 
