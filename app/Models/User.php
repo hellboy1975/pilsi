@@ -14,7 +14,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements FilamentUser, HasAvatar
+class User extends Authenticatable implements FilamentUser
 {
     use HasApiTokens, HasFactory, HasRoles, HasSuperAdmin, Notifiable;
 
@@ -61,12 +61,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     {
         return $this->hasMany(Attempt::class, 'attempt_id');
     }
-
-    public function getFilamentAvatarUrl(): ?string
-    {
-        return $this->avatar_url;
-    }
-
+    
     public function clubs(): BelongsToMany
     {
         return $this->belongsToMany(Club::class, 'user_club');
