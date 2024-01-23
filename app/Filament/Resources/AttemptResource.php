@@ -24,21 +24,20 @@ class AttemptResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('visit_id')
+                    ->relationship('visit', 'start_date'),
                 Forms\Components\Select::make('squeeze_id')
                     ->relationship('squeeze', 'name'),
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name'),
-                Forms\Components\Select::make('visit_id')
-                    ->relationship('visit', 'start_date'),
-                Forms\Components\DateTimePicker::make('date')
+                Forms\Components\TimePicker::make('date')
                     ->required()
-                    ->withoutSeconds()
-                    ->maxDate(now()),
-                Forms\Components\Radio::make('success')
+                    ->seconds(false)
+                    ->default(now()),
+                Forms\Components\Toggle::make('success')
                     ->label('Did you make it through?')
-                    ->boolean()
                     ->required(),
-                Forms\Components\RichEditor::make('notes')
+                Forms\Components\MarkdownEditor::make('notes')
                     ->required()
                     ->maxLength(255)
                     ->columnSpanFull(),
