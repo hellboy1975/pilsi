@@ -18,7 +18,7 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationGroup = 'Manage';
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
@@ -63,8 +63,6 @@ class UserResource extends Resource
                     ])->hiddenOn('create'),
             ]);
     }
-
-    
 
     public static function table(Table $table): Table
     {

@@ -17,7 +17,7 @@ class SqueezeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-inbox-arrow-down';
 
-    protected static ?string $navigationGroup = 'Data';
+    protected static ?string $navigationGroup = 'Manage';
 
     protected static ?int $navigationSort = 4;
 

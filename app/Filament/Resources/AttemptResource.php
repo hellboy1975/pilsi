@@ -16,7 +16,7 @@ class AttemptResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-arrow-up-tray';
 
-    protected static ?string $navigationGroup = 'Data';
+    protected static ?string $navigationGroup = 'Manage';
 
     protected static ?int $navigationSort = 9;
 

@@ -24,7 +24,7 @@ class CaveResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-stop';
 
-    protected static ?string $navigationGroup = 'Data';
+    protected static ?string $navigationGroup = 'Manage';
 
     protected static ?int $navigationSort = 3;
 
@@ -122,7 +122,7 @@ class CaveResource extends Resource
                     ->iconButton(),
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make()
+                Tables\Actions\CreateAction::make(),
             ]);
     }
 
