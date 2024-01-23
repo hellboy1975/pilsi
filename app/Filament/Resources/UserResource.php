@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Hash;
+
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
@@ -63,12 +64,12 @@ class UserResource extends Resource
             ]);
     }
 
+    
+
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('avatar')
-                    ->visibleFrom('md'),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
