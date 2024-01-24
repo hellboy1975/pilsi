@@ -12,6 +12,7 @@ use Awcodes\FilamentGravatar\GravatarProvider;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -80,6 +81,11 @@ class AdminPanelProvider extends PanelProvider
                         hasAvatars: true, // Enables the avatar upload form component (default = false)
                         slug: 'profile' // Sets the slug for the profile page (default = 'my-profile')
                     ),
+            ])
+            ->navigationGroups([
+                'Manage',
+                'Security',
+                'Settings',
             ]);
     }
 }
