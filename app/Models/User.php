@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Althinect\FilamentSpatieRolesPermissions\Concerns\HasSuperAdmin;
 use Filament\Models\Contracts\FilamentUser;
-use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -61,7 +60,7 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->hasMany(Attempt::class, 'attempt_id');
     }
-    
+
     public function clubs(): BelongsToMany
     {
         return $this->belongsToMany(Club::class, 'user_club');
