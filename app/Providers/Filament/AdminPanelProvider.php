@@ -4,6 +4,10 @@ namespace App\Providers\Filament;
 
 use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugin;
 use App\Filament\Widgets\GravatarOverview;
+use App\Filament\Widgets\LatestCaves;
+use App\Filament\Widgets\LatestSqueezeAttempts;
+use App\Filament\Widgets\LatestSqueezes;
+use App\Filament\Widgets\LatestUsers;
 use Awcodes\FilamentGravatar\GravatarPlugin;
 use Awcodes\FilamentGravatar\GravatarProvider;
 use Filament\Http\Middleware\Authenticate;
@@ -45,8 +49,11 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
                 GravatarOverview::class,
+                LatestCaves::class,
+                LatestUsers::class,
+                LatestSqueezeAttempts::class,
+                LatestSqueezes::class,
             ])
             ->middleware([
                 EncryptCookies::class,
