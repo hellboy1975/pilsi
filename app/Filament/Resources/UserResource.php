@@ -45,8 +45,10 @@ class UserResource extends Resource
                             ->suffixIcon('heroicon-m-at-symbol')
                             ->maxLength(255),
                         Forms\Components\Select::make('roles')
+                            ->relationship('roles', 'name')
                             ->multiple()
-                            ->relationship('roles', 'name'),
+                            ->preload()
+                            ->searchable(),
                         Forms\Components\MarkdownEditor::make('bio')
                             ->label('User Biography')
                             ->maxLength(5000)

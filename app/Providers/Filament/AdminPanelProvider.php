@@ -2,7 +2,6 @@
 
 namespace App\Providers\Filament;
 
-use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugin;
 use App\Filament\Widgets\GravatarOverview;
 use App\Filament\Widgets\LatestCaves;
 use App\Filament\Widgets\LatestSqueezeAttempts;
@@ -71,8 +70,8 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->defaultAvatarProvider(GravatarProvider::class)
             ->plugins([
-                FilamentSpatieRolesPermissionsPlugin::make(),
                 GravatarPlugin::make(),
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 BreezyCore::make()
                     ->myProfile(
                         shouldRegisterUserMenu: true, // Sets the 'account' link in the panel User Menu (default = true)
@@ -81,6 +80,12 @@ class AdminPanelProvider extends PanelProvider
                         hasAvatars: true, // Enables the avatar upload form component (default = false)
                         slug: 'profile' // Sets the slug for the profile page (default = 'my-profile')
                     ),
+            ])
+            ->navigationGroups([
+                'My PilSi',
+                'Manage',
+                'Security',
+                'Settings',
             ]);
     }
 }
