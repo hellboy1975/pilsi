@@ -4,6 +4,10 @@
 
 </p>
 
+![Static Badge](https://img.shields.io/badge/Laravel-10.0-blue)
+![Static Badge](https://img.shields.io/badge/Filament-3.2-blue)
+
+
 ## Introduction
 
 This repository is a Laravel built site create to support the online version of the PiLSI.  It consists of a few things:
@@ -33,7 +37,7 @@ The PiLSI is named after prominent South Australian cavers Graham Pilkington (ph
 
 ### Setting up your dev environment
 
-For local development I've been using [Laravel Sail](https://laravel.com/docs/9.x/sail).  To get it up and running, make sure you do the following:
+For local development I've been using [Laravel Sail](https://laravel.com/docs/10.x/sail).  To get it up and running, make sure you do the following:
 
     cp .env.example .env
     composer install
@@ -97,3 +101,6 @@ This site leverages the following frameworks and libraries:
 * [Filament](https://filamentphp.com/)
 * [Blade Icons](https://github.com/blade-ui-kit/blade-icons)
 * [Feather Icons](https://github.com/brunocfalcao/blade-feather-icons)
+* [Filament Shield](https://github.com/bezhanSalleh/filament-shield)
+* [Filament Breezy](https://github.com/jeffgreco13/filament-breezy)
+* [Filament Gravatar](https://github.com/awcodes/filament-gravatar)
