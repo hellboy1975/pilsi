@@ -77,12 +77,12 @@ class AdminPanelProvider extends PanelProvider
                         shouldRegisterUserMenu: true, // Sets the 'account' link in the panel User Menu (default = true)
                         shouldRegisterNavigation: true, // Adds a main navigation item for the My Profile page (default = false)
                         navigationGroup: 'Settings', // Sets the navigation group for the My Profile page (default = null)
-                            hasAvatars: true, // Enables the avatar upload form component (default = false)
+                        hasAvatars: true, // Enables the avatar upload form component (default = false)
                         slug: 'profile' // Sets the slug for the profile page (default = 'my-profile')
                     ),
             ])
             ->navigationGroups([
-                    'My PilSi',
+                'My PilSi',
                 'Manage',
                 'Security',
                 'Settings',
