@@ -18,6 +18,7 @@ yarn-error.log
 /public/build
 /public/build/manifest.json
 /public/vendor
+/public/images
 public/js/app.js.LICENSE.txt
 /machines/fly-redis
 
