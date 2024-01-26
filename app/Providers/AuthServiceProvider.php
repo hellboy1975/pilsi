@@ -25,13 +25,5 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Gate::before(function (User $user, string $ability) {
-            if (str_ends_with($user->email, env('APP_EMAIL_DOMAIN', '@pilsi.xyz')) || $user->isSuperAdmin()) {
-                return true;
-            }
-
-            return null;
-        });
-
     }
 }
