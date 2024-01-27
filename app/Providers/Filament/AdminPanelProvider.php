@@ -24,6 +24,8 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
+use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
+use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -73,6 +75,11 @@ class AdminPanelProvider extends PanelProvider
             ->defaultAvatarProvider(GravatarProvider::class)
             ->plugins([
                 GravatarPlugin::make(),
+                FilamentBackgroundsPlugin::make()
+                ->imageProvider(
+                    MyImages::make()
+                        ->directory('images/backgrounds')
+                ),
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 BreezyCore::make()
                     ->myProfile(
