@@ -31,6 +31,8 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
+            ->brandName('PiLSi')
+            ->favicon(asset('images/favicon-16x16.png'))
             ->id('admin')
             ->path('admin')
             ->login()
