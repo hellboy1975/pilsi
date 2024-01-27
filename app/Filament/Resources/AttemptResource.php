@@ -6,6 +6,8 @@ use App\Filament\Resources\AttemptResource\Pages;
 use App\Models\Attempt;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -19,6 +21,26 @@ class AttemptResource extends Resource
     protected static ?string $navigationGroup = 'Manage';
 
     protected static ?int $navigationSort = 9;
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Infolists\Components\Section::make('Cave details')
+                    ->columns([
+                        'default' => 1,
+                        'xl' => 2,
+                    ])
+                    ->schema([
+                        Infolists\Components\TextEntry::make('squeeze.name'),
+                        Infolists\Components\IconEntry::make('success')
+                            ->boolean(),
+                        Infolists\Components\TextEntry::make('user.name'),
+                        Infolists\Components\TextEntry::make('date')->date(),
+                    ]),
+
+            ]);
+    }
 
     public static function form(Form $form): Form
     {
@@ -90,6 +112,7 @@ class AttemptResource extends Resource
             'index' => Pages\ListAttempts::route('/'),
             'create' => Pages\CreateAttempt::route('/create'),
             'edit' => Pages\EditAttempt::route('/{record}/edit'),
+            'view' => Pages\ViewAttempt::route('/{record}'),
         ];
     }
 }
