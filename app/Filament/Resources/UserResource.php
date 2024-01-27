@@ -9,10 +9,12 @@ use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Infolists;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
 {
@@ -55,14 +57,24 @@ class UserResource extends Resource
                             ->columnSpanFull(),
 
                     ]),
-                Section::make('Change Password')
-                    ->description('To change your password just fill in the form below')
+            ]);
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Infolists\Components\Section::make('Squeeze details')
+                    ->columns([
+                        'default' => 1,
+                        'xl' => 2,
+                    ])
                     ->schema([
-                        TextInput::make('password')
-                            ->password()
-                            ->dehydrateStateUsing(fn (string $state): string => Hash::make($state))
-                            ->dehydrated(fn (?string $state): bool => filled($state)),
-                    ])->hiddenOn('create'),
+                        Infolists\Components\TextEntry::make('name'),
+                        Infolists\Components\TextEntry::make('bio')
+                            ->columnSpanFull(),
+                    ]),
+
             ]);
     }
 
@@ -81,8 +93,15 @@ class UserResource extends Resource
                     ->sortable()
                     ->visibleFrom('md'),
             ])
-            ->filters([
-                //
+            ->actions([
+                Action::make('view')
+                    ->url(fn (User $record): string => route('filament.admin.resources.users.view', $record))
+                    ->icon('heroicon-m-eye')
+                    ->iconButton(),
+                Action::make('edit')
+                    ->url(fn (User $record): string => route('filament.admin.resources.users.edit', $record))
+                    ->icon('heroicon-m-pencil')
+                    ->iconButton(),
             ]);
     }
 
@@ -99,6 +118,7 @@ class UserResource extends Resource
             'index' => Pages\ListUsers::route('/'),
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
+            'view' => Pages\ViewUser::route('/{record}'),
         ];
     }
 }
