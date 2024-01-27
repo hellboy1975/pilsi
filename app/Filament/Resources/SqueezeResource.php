@@ -10,6 +10,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Infolists;
+use Filament\Infolists\Infolist;
 
 class SqueezeResource extends Resource
 {
@@ -27,6 +29,28 @@ class SqueezeResource extends Resource
     public static function getNavigationBadge(): ?string
     {
         return number_format(static::getModel()::count());
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Infolists\Components\Section::make('Squeeze details')
+                    ->columns([
+                        'default' => 1,
+                        'xl' => 2,
+                    ])
+                    ->schema([
+                        Infolists\Components\TextEntry::make('name'),
+                        Infolists\Components\TextEntry::make('cave.name'),
+                        Infolists\Components\TextEntry::make('pilsi')
+                        ->label('PiLSi'),
+                        Infolists\Components\TextEntry::make('description'),
+                        Infolists\Components\ImageEntry::make('main_picture')
+                            ->columnSpanFull(),
+                    ]),
+
+            ]);
     }
 
     public static function form(Form $form): Form
@@ -106,6 +130,7 @@ class SqueezeResource extends Resource
             'index' => Pages\ListSqueezes::route('/'),
             'create' => Pages\CreateSqueeze::route('/create'),
             'edit' => Pages\EditSqueeze::route('/{record}/edit'),
+            'view' => Pages\ViewSqueeze::route('/{record}'),
         ];
     }
 }
