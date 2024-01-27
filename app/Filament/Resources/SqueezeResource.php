@@ -7,11 +7,11 @@ use App\Filament\Resources\SqueezeResource\RelationManagers\AttemptsRelationMana
 use App\Models\Squeeze;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Infolists;
-use Filament\Infolists\Infolist;
 
 class SqueezeResource extends Resource
 {
@@ -44,7 +44,7 @@ class SqueezeResource extends Resource
                         Infolists\Components\TextEntry::make('name'),
                         Infolists\Components\TextEntry::make('cave.name'),
                         Infolists\Components\TextEntry::make('pilsi')
-                        ->label('PiLSi'),
+                            ->label('PiLSi'),
                         Infolists\Components\TextEntry::make('description'),
                         Infolists\Components\ImageEntry::make('main_picture')
                             ->columnSpanFull(),

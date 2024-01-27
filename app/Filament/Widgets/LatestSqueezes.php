@@ -30,6 +30,5 @@ class LatestSqueezes extends BaseWidget
                 fn (Squeeze $record): string => route('filament.admin.resources.squeezes.view', ['record' => $record]),
             );
 
-            
     }
 }
