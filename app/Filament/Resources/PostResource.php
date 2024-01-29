@@ -14,6 +14,9 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
+use Filament\Infolists\Components\Section as ComponentsSection;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -28,6 +31,37 @@ class PostResource extends Resource
     protected static ?string $navigationGroup = 'Manage';
 
     protected static ?int $navigationSort = 10;
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                ComponentsSection::make()->schema([
+                    TextEntry::make('title'),
+                    TextEntry::make('status')
+                        ->badge()
+                        ->color(fn (string $state): string => match ($state) {
+                            'draft' => 'gray',
+                            'reviewing' => 'warning',
+                            'published' => 'success',
+                            'rejected' => 'danger',
+                        }),
+                    TextEntry::make('post_type')
+                        ->badge()
+                        ->color(fn (string $state): string => match ($state) {
+                            'news' => 'warning',
+                            'page' => 'success',
+                            'journal' => 'danger',
+                        }),
+                    TextEntry::make('description'),
+                ])->columns(3),
+                ComponentsSection::make()->schema([
+                    TextEntry::make('content')
+                        ->hiddenLabel()
+                        ->markdown(),
+                ]),
+            ]);
+    }
 
     public static function form(Form $form): Form
     {
@@ -52,10 +86,10 @@ class PostResource extends Resource
                                     ->image()
                                     ->imageEditor()
                                     ->imageEditorAspectRatios([
-                                    '16:9',
-                                    '4:3',
-                                    '1:1',
-                                ]),
+                                        '16:9',
+                                        '4:3',
+                                        '1:1',
+                                    ]),
                             ]),
                     ])
                     ->columnSpan(['lg' => 2]),
@@ -65,17 +99,17 @@ class PostResource extends Resource
                             Select::make('post_type')
                                 ->default('news')
                                 ->options([
-                                'news' => 'News',
-                                'page' => 'Page',
-                                'journal' => 'Journal',
+                                    'news' => 'News',
+                                    'page' => 'Page',
+                                    'journal' => 'Journal',
                                 ])
                                 ->live(),
                             Select::make('status')
                                 ->options([
-                                'draft' => 'Draft',
-                                'reviewing' => 'Reviewing',
-                                'published' => 'Published',
-                                'rejected' => 'Rejected',
+                                    'draft' => 'Draft',
+                                    'reviewing' => 'Reviewing',
+                                    'published' => 'Published',
+                                    'rejected' => 'Rejected',
                                 ])
                                 ->default('draft'),
                             Select::make('user_id')
