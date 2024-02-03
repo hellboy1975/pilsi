@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Widgets\GravatarOverview;
 use App\Filament\Widgets\LatestCaves;
+use App\Filament\Widgets\LatestNewsPosts;
 use App\Filament\Widgets\LatestSqueezeAttempts;
 use App\Filament\Widgets\LatestSqueezes;
 use App\Filament\Widgets\LatestUsers;
@@ -52,11 +53,6 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                GravatarOverview::class,
-                LatestCaves::class,
-                LatestUsers::class,
-                LatestSqueezeAttempts::class,
-                LatestSqueezes::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -76,10 +72,10 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 GravatarPlugin::make(),
                 FilamentBackgroundsPlugin::make()
-                ->imageProvider(
-                    MyImages::make()
-                        ->directory('images/backgrounds')
-                ),
+                    ->imageProvider(
+                        MyImages::make()
+                            ->directory('images/backgrounds')
+                    ),
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 BreezyCore::make()
                     ->myProfile(
