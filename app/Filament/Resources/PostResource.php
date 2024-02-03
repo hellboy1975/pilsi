@@ -20,6 +20,7 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class PostResource extends Resource
@@ -153,7 +154,19 @@ class PostResource extends Resource
                     ->date(),
             ])
             ->filters([
-                //
+                SelectFilter::make('status')
+                    ->options([
+                        'draft' => 'Draft',
+                        'reviewing' => 'Reviewing',
+                        'published' => 'Published',
+                        'rejected' => 'Rejected',
+                    ]),
+                SelectFilter::make('post_type')
+                    ->options([
+                        'news' => 'News',
+                        'page' => 'Page',
+                        'journal' => 'Journal',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
