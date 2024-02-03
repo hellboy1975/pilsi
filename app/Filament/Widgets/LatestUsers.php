@@ -10,6 +10,8 @@ use Filament\Widgets\TableWidget as BaseWidget;
 
 class LatestUsers extends BaseWidget
 {
+    protected static ?int $sort = 3;
+
     public function table(Table $table): Table
     {
         return $table
