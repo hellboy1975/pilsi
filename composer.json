@@ -10,6 +10,7 @@
         "awcodes/filament-gravatar": "^2.0",
         "bezhansalleh/filament-shield": "^3.2",
         "blade-ui-kit/blade-icons": "*",
+        "blendbyte/filament-title-with-slug": "^1.0",
         "brunocfalcao/blade-feather-icons": "*",
         "doctrine/dbal": "^3.0",
         "filament/filament": "^3.2",

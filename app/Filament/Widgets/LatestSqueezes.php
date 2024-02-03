@@ -10,6 +10,8 @@ use Filament\Widgets\TableWidget as BaseWidget;
 
 class LatestSqueezes extends BaseWidget
 {
+    protected static ?int $sort = 2;
+
     public function table(Table $table): Table
     {
         return $table
