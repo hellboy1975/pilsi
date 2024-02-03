@@ -107,10 +107,13 @@ class SqueezeResource extends Resource
                     ->sortable(),
             ])
             ->filters([
-                //
+                
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->iconButton(),
+                Tables\Actions\ViewAction::make()
+                    ->iconButton(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
