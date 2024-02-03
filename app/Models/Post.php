@@ -20,6 +20,7 @@ class Post extends Model
         'featured_image',
         'published_at',
         'status',
+        'parent_id',
     ];
 
     /** @return BelongsTo<Post, Model> */
