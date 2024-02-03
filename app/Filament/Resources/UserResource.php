@@ -14,7 +14,12 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
+use Awcodes\FilamentGravatar\Gravatar;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Columns\Layout\Split;
+use Filament\Tables\Columns\TextColumn;
 
 class UserResource extends Resource
 {
@@ -51,6 +56,11 @@ class UserResource extends Resource
                             ->multiple()
                             ->preload()
                             ->searchable(),
+                        TextInput::make('password')
+                            ->password()
+                            ->revealable()
+                            ->hiddenOn('edit')
+                            ->required(),
                         Forms\Components\MarkdownEditor::make('bio')
                             ->label('User Biography')
                             ->maxLength(5000)
@@ -64,15 +74,18 @@ class UserResource extends Resource
     {
         return $infolist
             ->schema([
-                Infolists\Components\Section::make('Squeeze details')
+                Infolists\Components\Section::make(fn ($record): string => $record->name)
                     ->columns([
                         'default' => 1,
                         'xl' => 2,
                     ])
                     ->schema([
-                        Infolists\Components\TextEntry::make('name'),
+                        Infolists\Components\ImageEntry::make('avatar')
+                            ->defaultImageUrl(fn ($record): string => Gravatar::get(email: $record->email))
+                            ->circular()
+                            ->label(''),
                         Infolists\Components\TextEntry::make('bio')
-                            ->columnSpanFull(),
+                            ->markdown(),
                     ]),
 
             ]);
@@ -82,26 +95,35 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('email')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime('M j, Y')
-                    ->sortable()
-                    ->visibleFrom('md'),
+                Split::make([
+                    ImageColumn::make('avatar')
+                        ->defaultImageUrl(fn ($record): string => Gravatar::get(email: $record->email))
+                        ->circular()
+                        ->grow(false)
+                        ->label(''),
+                    TextColumn::make('name')
+                        ->searchable()
+                        ->sortable(),
+                    TextColumn::make('email')
+                        ->searchable()
+                        ->sortable(),
+                ])
+                ->from('md')
             ])
             ->actions([
-                Action::make('view')
-                    ->url(fn (User $record): string => route('filament.admin.resources.users.view', $record))
-                    ->icon('heroicon-m-eye')
-                    ->iconButton(),
-                Action::make('edit')
-                    ->url(fn (User $record): string => route('filament.admin.resources.users.edit', $record))
-                    ->icon('heroicon-m-pencil')
-                    ->iconButton(),
+                ActionGroup::make([
+                    Action::make('view')
+                        ->url(fn (User $record): string => route('filament.admin.resources.users.view', $record))
+                        ->icon('heroicon-m-eye'),
+                    Action::make('edit')
+                        ->url(fn (User $record): string => route('filament.admin.resources.users.edit', $record))
+                        ->icon('heroicon-m-pencil'),
+                    Tables\Actions\DeleteAction::make(),
+                ])
+                ->label('Actions'),
+            ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
             ]);
     }
 
