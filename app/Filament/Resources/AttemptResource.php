@@ -10,6 +10,7 @@ use Filament\Infolists;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 
 class AttemptResource extends Resource
@@ -89,10 +90,11 @@ class AttemptResource extends Resource
                     ->sortable(),
             ])
             ->filters([
-                //
+                TernaryFilter::make('success'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->iconButton(),
+                Tables\Actions\ViewAction::make()->iconButton(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
