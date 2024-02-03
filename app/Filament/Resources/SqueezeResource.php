@@ -107,7 +107,7 @@ class SqueezeResource extends Resource
                     ->sortable(),
             ])
             ->filters([
-                
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make()

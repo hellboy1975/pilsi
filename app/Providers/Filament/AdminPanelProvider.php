@@ -2,12 +2,6 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Widgets\GravatarOverview;
-use App\Filament\Widgets\LatestCaves;
-use App\Filament\Widgets\LatestNewsPosts;
-use App\Filament\Widgets\LatestSqueezeAttempts;
-use App\Filament\Widgets\LatestSqueezes;
-use App\Filament\Widgets\LatestUsers;
 use Awcodes\FilamentGravatar\GravatarPlugin;
 use Awcodes\FilamentGravatar\GravatarProvider;
 use Filament\Http\Middleware\Authenticate;
