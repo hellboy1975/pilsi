@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')
                 ->index();
-            $table->foreignId('entity_id')
+            $table->foreignId('entity_type')
                 ->references('id')
                 ->on('entities')
                 ->index();
+            $table->bigInteger('entity_id');
             $table->timestamps();
         });
     }
