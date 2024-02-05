@@ -6,17 +6,18 @@ use App\Filament\Resources\CaveResource\Pages;
 use App\Filament\Resources\CaveResource\RelationManagers\SqueezesRelationManager;
 use App\Filament\Resources\CaveResource\RelationManagers\VisitsRelationManager;
 use App\Models\Cave;
+use App\Models\UserFavourite;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Infolists;
+use Filament\Infolists\Components\Actions\Action as ActionsAction;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-
-// use Filament\Forms\Components\Section;
+use Illuminate\Support\Facades\Auth;
 
 class CaveResource extends Resource
 {
@@ -28,12 +29,60 @@ class CaveResource extends Resource
 
     protected static ?int $navigationSort = 3;
 
+    const ENTITY_TYPE = 1;
+
     /**
      * Get the navigation badge for the resource.
      */
     public static function getNavigationBadge(): ?string
     {
         return number_format(static::getModel()::count());
+    }
+
+    /**
+     * checks to see if the current use has a favourite for this entity
+     *
+     * @param integer $entityId
+     * @return boolean
+     */
+    public static function hasFavourite(int $entityId): bool
+    {
+        return UserFavourite::where([
+            ['user_id', Auth::id()],
+            ['entity_id', $entityId],
+            ['entity_type', CaveResource::ENTITY_TYPE] // probs shouldn't hardcode this
+        ])->exists();
+    }
+
+    /**
+     * TODO: complete this function, and/or work out how to do it properly
+     * toggles the favourite state of this entity
+     *
+     * @return boolean the current state of this favourite
+     */
+    public static function toggleFavourite(int $entityId): bool
+    {
+        $state = false;
+        $fav = UserFavourite::where([
+            ['user_id', Auth::id()],
+            ['entity_id', $entityId],
+            ['entity_type', CaveResource::ENTITY_TYPE] // probs shouldn't hardcode this
+        ]);
+
+        if ($fav->exists()) {
+            // delete the record
+            $fav->delete();
+        } else {
+            $fav = new UserFavourite;
+            $fav->entity_id = $entityId;
+            $fav->user_id = Auth::id();
+            $fav->entity_type = CaveResource::ENTITY_TYPE;
+            $fav->save();
+
+            $state = true;
+        }
+
+        return $state;
     }
 
     public static function infolist(Infolist $infolist): Infolist
@@ -49,8 +98,15 @@ class CaveResource extends Resource
                         Infolists\Components\TextEntry::make('name'),
                         Infolists\Components\TextEntry::make('code'),
                         Infolists\Components\TextEntry::make('region.name'),
+                        Infolists\Components\TextEntry::make('region.name'),
                         Infolists\Components\ImageEntry::make('main_picture')
                             ->columnSpanFull(),
+                    ])
+                    ->headerActions([
+                        ActionsAction::make('Favourite')
+                            // show the outline of a heart if no favourite record is found
+                            ->icon(fn (Cave $record): string => CaveResource::hasFavourite($record->id) ? 'heroicon-m-heart' : 'heroicon-o-heart')
+                            ->iconButton(),
                     ]),
 
             ]);
