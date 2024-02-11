@@ -27,4 +27,9 @@ class Cave extends Model
     {
         return $this->hasMany(Visit::class, 'cave_id');
     }
+
+    public function likes(): HasMany
+    {
+        return $this->hasMany(UserFavourite::class, 'entity_id')->where('entity_type', static::class);
+    }
 }
