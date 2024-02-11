@@ -135,4 +135,16 @@ class User extends Authenticatable implements FilamentUser
 
         return $state;
     }
+
+    /**
+     * checks to see if the current use has a favourite for this entity
+     */
+    public static function hasFavourite(Model $entity): bool
+    {
+        return UserFavourite::where([
+            ['user_id', Auth::id()],
+            ['entity_id', $entity->id],
+            ['entity_type', $entity::class], // probs shouldn't hardcode this
+        ])->exists();
+    }
 }

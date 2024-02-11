@@ -6,6 +6,7 @@ use App\Filament\Resources\CaveResource\Pages;
 use App\Filament\Resources\CaveResource\RelationManagers\SqueezesRelationManager;
 use App\Filament\Resources\CaveResource\RelationManagers\VisitsRelationManager;
 use App\Models\Cave;
+use App\Models\User;
 use App\Models\UserFavourite;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -39,52 +40,6 @@ class CaveResource extends Resource
         return number_format(static::getModel()::count());
     }
 
-    /**
-     * checks to see if the current use has a favourite for this entity
-     *
-     * @param integer $entityId
-     * @return boolean
-     */
-    public static function hasFavourite(int $entityId): bool
-    {
-        return UserFavourite::where([
-            ['user_id', Auth::id()],
-            ['entity_id', $entityId],
-            ['entity_type', CaveResource::ENTITY_TYPE] // probs shouldn't hardcode this
-        ])->exists();
-    }
-
-    /**
-     * TODO: complete this function, and/or work out how to do it properly
-     * toggles the favourite state of this entity
-     *
-     * @return boolean the current state of this favourite
-     */
-    public static function toggleFavourite(int $entityId): bool
-    {
-        $state = false;
-        $fav = UserFavourite::where([
-            ['user_id', Auth::id()],
-            ['entity_id', $entityId],
-            ['entity_type', CaveResource::ENTITY_TYPE] // probs shouldn't hardcode this
-        ]);
-
-        if ($fav->exists()) {
-            // delete the record
-            $fav->delete();
-        } else {
-            $fav = new UserFavourite;
-            $fav->entity_id = $entityId;
-            $fav->user_id = Auth::id();
-            $fav->entity_type = CaveResource::ENTITY_TYPE;
-            $fav->save();
-
-            $state = true;
-        }
-
-        return $state;
-    }
-
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
@@ -101,12 +56,11 @@ class CaveResource extends Resource
                         Infolists\Components\TextEntry::make('region.name'),
                         Infolists\Components\ImageEntry::make('main_picture')
                             ->columnSpanFull(),
-                    ])
-                    ->headerActions([
+                    ])->headerActions([
                         ActionsAction::make('Favourite')
-                            // show the outline of a heart if no favourite record is found
-                            ->icon(fn (Cave $record): string => CaveResource::hasFavourite($record->id) ? 'heroicon-m-heart' : 'heroicon-o-heart')
-                            ->iconButton(),
+                            ->action(function (Cave $cave) {
+                                User::toggleFavourite($cave);
+                            })->icon(fn (Cave $record): string => User::hasFavourite($record) ? 'heroicon-m-heart' : 'heroicon-o-heart'),
                     ]),
 
             ]);
