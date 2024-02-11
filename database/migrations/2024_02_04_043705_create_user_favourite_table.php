@@ -16,9 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)
                 ->index();
-            $table->foreignId('entity_type')
-                ->references('id')
-                ->on('entities')
+            $table->string('entity_type')
                 ->index();
             $table->bigInteger('entity_id');
             $table->timestamps();
