@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
+use Awcodes\FilamentGravatar\Gravatar;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
@@ -14,12 +15,11 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Tables\Table;
-use Awcodes\FilamentGravatar\Gravatar;
 use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 
 class UserResource extends Resource
 {
@@ -108,7 +108,7 @@ class UserResource extends Resource
                         ->searchable()
                         ->sortable(),
                 ])
-                ->from('md')
+                    ->from('md'),
             ])
             ->actions([
                 ActionGroup::make([
@@ -120,7 +120,7 @@ class UserResource extends Resource
                         ->icon('heroicon-m-pencil'),
                     Tables\Actions\DeleteAction::make(),
                 ])
-                ->label('Actions'),
+                    ->label('Actions'),
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
