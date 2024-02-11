@@ -6,8 +6,13 @@ use App\Filament\Forms\Components\LocalisedCountrySelect;
 use App\Filament\Resources\RegionResource\Pages;
 use App\Filament\Resources\RegionResource\RelationManagers;
 use App\Models\Region;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\Actions\Action;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -21,6 +26,33 @@ class RegionResource extends Resource
     protected static ?string $navigationGroup = 'Manage';
 
     protected static ?int $navigationSort = 1;
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Section::make('Squeeze details')
+                    ->columns([
+                        'default' => 1,
+                        'xl' => 2,
+                    ])
+                    ->schema([
+                        TextEntry::make('name'),
+                        TextEntry::make('code'),
+                        TextEntry::make('country_code')
+                            ->label('PiLSi'),
+                        TextEntry::make('description')
+                            ->columnSpanFull(),
+                    ])
+                    ->headerActions([
+                        Action::make('Favourite')
+                            ->action(function (Region $entity) {
+                                User::toggleFavourite($entity);
+                            })->icon(fn (Region $record): string => User::hasFavourite($record) ? 'heroicon-m-heart' : 'heroicon-o-heart'),
+                    ]),
+
+            ]);
+    }
 
     public static function form(Form $form): Form
     {
@@ -70,6 +102,7 @@ class RegionResource extends Resource
             'index' => Pages\ListRegions::route('/'),
             'create' => Pages\CreateRegion::route('/create'),
             'edit' => Pages\EditRegion::route('/{record}/edit'),
+            'view' => Pages\ViewRegion::route('/{record}'),
         ];
     }
 }
