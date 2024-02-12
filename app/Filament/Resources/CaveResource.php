@@ -28,8 +28,6 @@ class CaveResource extends Resource
 
     protected static ?int $navigationSort = 3;
 
-    const ENTITY_TYPE = 1;
-
     /**
      * Get the navigation badge for the resource.
      */
