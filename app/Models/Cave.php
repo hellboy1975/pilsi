@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Cave extends Model
 {
@@ -31,5 +32,10 @@ class Cave extends Model
     public function likes(): HasMany
     {
         return $this->hasMany(UserFavourite::class, 'entity_id')->where('entity_type', static::class);
+    }
+
+    public function favourite(): MorphOne
+    {
+        return $this->morphOne(UserFavourite::class, 'entity');
     }
 }
