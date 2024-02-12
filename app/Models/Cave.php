@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Support\Facades\Auth;
 
 class Cave extends Model
 {
@@ -37,5 +38,13 @@ class Cave extends Model
     public function favourite(): MorphOne
     {
         return $this->morphOne(UserFavourite::class, 'entity');
+    }
+
+    protected static function booted()
+    {
+        // when creating a cave this sets the creator_id to that of the current user
+        static::creating(function ($model) {
+            $model->creator_id = Auth::id();
+        });
     }
 }
