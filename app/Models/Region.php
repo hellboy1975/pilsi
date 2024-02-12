@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Region extends Model
 {
@@ -25,5 +26,10 @@ class Region extends Model
     public function trips(): HasMany
     {
         return $this->hasMany(Trip::class, 'region_id');
+    }
+
+    public function favourite(): MorphOne
+    {
+        return $this->morphOne(UserFavourite::class, 'entity');
     }
 }

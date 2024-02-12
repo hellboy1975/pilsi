@@ -5,9 +5,11 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\SqueezeResource\Pages;
 use App\Filament\Resources\SqueezeResource\RelationManagers\AttemptsRelationManager;
 use App\Models\Squeeze;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Infolists;
+use Filament\Infolists\Components\Actions\Action;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -48,6 +50,12 @@ class SqueezeResource extends Resource
                         Infolists\Components\TextEntry::make('description'),
                         Infolists\Components\ImageEntry::make('main_picture')
                             ->columnSpanFull(),
+                    ])
+                    ->headerActions([
+                        Action::make('Favourite')
+                            ->action(function (Squeeze $squeeze) {
+                                User::toggleFavourite($squeeze);
+                            })->icon(fn (Squeeze $record): string => User::hasFavourite($record) ? 'heroicon-m-heart' : 'heroicon-o-heart'),
                     ]),
 
             ]);
