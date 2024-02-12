@@ -7,7 +7,6 @@ use App\Filament\Resources\CaveResource\RelationManagers\SqueezesRelationManager
 use App\Filament\Resources\CaveResource\RelationManagers\VisitsRelationManager;
 use App\Models\Cave;
 use App\Models\User;
-use App\Models\UserFavourite;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Infolists;
@@ -18,7 +17,6 @@ use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Auth;
 
 class CaveResource extends Resource
 {
