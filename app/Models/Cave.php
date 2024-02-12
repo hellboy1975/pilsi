@@ -20,6 +20,11 @@ class Cave extends Model
         return $this->belongsTo(Region::class, 'region_id');
     }
 
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'creator_id');
+    }
+
     public function squeezes(): HasMany
     {
         return $this->hasMany(Squeeze::class, 'cave_id');

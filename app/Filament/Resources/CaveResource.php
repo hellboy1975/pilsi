@@ -43,6 +43,7 @@ class CaveResource extends Resource
         return $infolist
             ->schema([
                 Infolists\Components\Section::make('Cave details')
+                    ->description(fn (Cave $record): string => "Added by {$record->creator->name}")
                     ->columns([
                         'default' => 1,
                         'xl' => 2,
