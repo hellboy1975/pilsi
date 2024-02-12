@@ -3,6 +3,9 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserFavouriteResource\Pages;
+use App\Models\Cave;
+use App\Models\Region;
+use App\Models\Squeeze;
 use App\Models\UserFavourite;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -61,6 +64,17 @@ class UserFavouriteResource extends Resource
                     ->label('Name')
                     ->searchable(),
             ])
+            ->recordUrl(
+                function (UserFavourite $record): string {
+                    if ($record->entity_type === Cave::class) {
+                        return route('filament.admin.resources.caves.view', ['record' => $record]);
+                    } else if ($record->entity_type === Region::class) {
+                        return route('filament.admin.resources.regions.view', ['record' => $record]);
+                    } else if ($record->entity_type === Squeeze::class) {
+                        return route('filament.admin.resources.squeezes.view', ['record' => $record]);
+                    }
+                }
+            )
             ->filters([
                 SelectFilter::make('entity_type')
                     ->label('Type')
