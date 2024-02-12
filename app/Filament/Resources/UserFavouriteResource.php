@@ -19,6 +19,14 @@ class UserFavouriteResource extends Resource
 
     protected static ?string $modelLabel = 'Favourites';
 
+    /**
+     * Get the navigation badge for the resource.
+     */
+    public static function getNavigationBadge(): ?string
+    {
+        return number_format(self::getEloquentQuery()->where('user_id', Auth::id())->count());
+    }
+
     public static function canCreate(): bool
     {
         return false;
@@ -32,6 +40,7 @@ class UserFavouriteResource extends Resource
             )
             ->columns([
                 TextColumn::make('entity_type')
+                    ->label('Type')
                     ->badge()
                     ->state(function (UserFavourite $favourite): string {
 
@@ -49,6 +58,7 @@ class UserFavouriteResource extends Resource
                         default => 'primary',
                     }),
                 TextColumn::make('entity.name')
+                    ->label('Name')
                     ->searchable(),
             ])
             ->filters([
