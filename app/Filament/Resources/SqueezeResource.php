@@ -5,8 +5,12 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\SqueezeResource\Pages;
 use App\Filament\Resources\SqueezeResource\RelationManagers\AttemptsRelationManager;
 use App\Models\Squeeze;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists;
+use Filament\Infolists\Components\Actions\Action;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -27,6 +31,34 @@ class SqueezeResource extends Resource
     public static function getNavigationBadge(): ?string
     {
         return number_format(static::getModel()::count());
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Infolists\Components\Section::make('Squeeze details')
+                    ->columns([
+                        'default' => 1,
+                        'xl' => 2,
+                    ])
+                    ->schema([
+                        Infolists\Components\TextEntry::make('name'),
+                        Infolists\Components\TextEntry::make('cave.name'),
+                        Infolists\Components\TextEntry::make('pilsi')
+                            ->label('PiLSi'),
+                        Infolists\Components\TextEntry::make('description'),
+                        Infolists\Components\ImageEntry::make('main_picture')
+                            ->columnSpanFull(),
+                    ])
+                    ->headerActions([
+                        Action::make('Favourite')
+                            ->action(function (Squeeze $squeeze) {
+                                User::toggleFavourite($squeeze);
+                            })->icon(fn (Squeeze $record): string => User::hasFavourite($record) ? 'heroicon-m-heart' : 'heroicon-o-heart'),
+                    ]),
+
+            ]);
     }
 
     public static function form(Form $form): Form
@@ -83,10 +115,13 @@ class SqueezeResource extends Resource
                     ->sortable(),
             ])
             ->filters([
-                //
+
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->iconButton(),
+                Tables\Actions\ViewAction::make()
+                    ->iconButton(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -106,6 +141,7 @@ class SqueezeResource extends Resource
             'index' => Pages\ListSqueezes::route('/'),
             'create' => Pages\CreateSqueeze::route('/create'),
             'edit' => Pages\EditSqueeze::route('/{record}/edit'),
+            'view' => Pages\ViewSqueeze::route('/{record}'),
         ];
     }
 }

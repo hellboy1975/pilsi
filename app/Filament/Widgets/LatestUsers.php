@@ -3,12 +3,15 @@
 namespace App\Filament\Widgets;
 
 use App\Filament\Resources\UserResource;
+use App\Models\User;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 
 class LatestUsers extends BaseWidget
 {
+    protected static ?int $sort = 3;
+
     public function table(Table $table): Table
     {
         return $table
@@ -22,6 +25,9 @@ class LatestUsers extends BaseWidget
                     ->sortable(),
                 Tables\Columns\TextColumn::make('email')
                     ->sortable(),
-            ]);
+            ])
+            ->recordUrl(
+                fn (User $record): string => route('filament.admin.resources.users.view', ['record' => $record]),
+            );
     }
 }

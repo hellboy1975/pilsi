@@ -2,11 +2,6 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Widgets\GravatarOverview;
-use App\Filament\Widgets\LatestCaves;
-use App\Filament\Widgets\LatestSqueezeAttempts;
-use App\Filament\Widgets\LatestSqueezes;
-use App\Filament\Widgets\LatestUsers;
 use Awcodes\FilamentGravatar\GravatarPlugin;
 use Awcodes\FilamentGravatar\GravatarProvider;
 use Filament\Http\Middleware\Authenticate;
@@ -24,6 +19,8 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
+use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
+use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -31,6 +28,8 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
+            ->brandName('PiLSi')
+            ->favicon(asset('images/favicon-16x16.png'))
             ->id('admin')
             ->path('admin')
             ->login()
@@ -48,11 +47,6 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                GravatarOverview::class,
-                LatestCaves::class,
-                LatestUsers::class,
-                LatestSqueezeAttempts::class,
-                LatestSqueezes::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -71,6 +65,11 @@ class AdminPanelProvider extends PanelProvider
             ->defaultAvatarProvider(GravatarProvider::class)
             ->plugins([
                 GravatarPlugin::make(),
+                FilamentBackgroundsPlugin::make()
+                    ->imageProvider(
+                        MyImages::make()
+                            ->directory('images/backgrounds')
+                    ),
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 BreezyCore::make()
                     ->myProfile(

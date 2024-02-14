@@ -3,12 +3,15 @@
 namespace App\Filament\Widgets;
 
 use App\Filament\Resources\CaveResource;
+use App\Models\Cave;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 
 class LatestCaves extends BaseWidget
 {
+    protected static ?int $sort = 2;
+
     public function table(Table $table): Table
     {
         return $table
@@ -24,6 +27,9 @@ class LatestCaves extends BaseWidget
                     ->sortable(),
                 Tables\Columns\TextColumn::make('region.name')
                     ->sortable(),
-            ]);
+            ])
+            ->recordUrl(
+                fn (Cave $record): string => route('filament.admin.resources.caves.view', ['record' => $record]),
+            );
     }
 }

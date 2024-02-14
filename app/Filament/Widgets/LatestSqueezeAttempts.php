@@ -3,12 +3,15 @@
 namespace App\Filament\Widgets;
 
 use App\Filament\Resources\AttemptResource;
+use App\Models\Attempt;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 
 class LatestSqueezeAttempts extends BaseWidget
 {
+    protected static ?int $sort = 2;
+
     public function table(Table $table): Table
     {
         return $table
@@ -30,6 +33,9 @@ class LatestSqueezeAttempts extends BaseWidget
                     ->alignCenter()
                     ->trueIcon('heroicon-o-check-badge')
                     ->falseIcon('heroicon-o-x-circle'),
-            ]);
+            ])
+            ->recordUrl(
+                fn (Attempt $record): string => route('filament.admin.resources.attempts.view', ['record' => $record]),
+            );
     }
 }

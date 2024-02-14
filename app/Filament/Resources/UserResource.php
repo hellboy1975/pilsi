@@ -5,14 +5,21 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
+use Awcodes\FilamentGravatar\Gravatar;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Infolists;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\Layout\Split;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
 {
@@ -44,25 +51,45 @@ class UserResource extends Resource
                             ->required()
                             ->suffixIcon('heroicon-m-at-symbol')
                             ->maxLength(255),
+                        TextInput::make('location')
+                            ->maxLength(150),
                         Forms\Components\Select::make('roles')
                             ->relationship('roles', 'name')
                             ->multiple()
                             ->preload()
                             ->searchable(),
+                        TextInput::make('password')
+                            ->password()
+                            ->revealable()
+                            ->hiddenOn('edit')
+                            ->required(),
                         Forms\Components\MarkdownEditor::make('bio')
                             ->label('User Biography')
                             ->maxLength(5000)
                             ->columnSpanFull(),
 
                     ]),
-                Section::make('Change Password')
-                    ->description('To change your password just fill in the form below')
+            ]);
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Infolists\Components\Section::make(fn ($record): string => $record->name)
+                    ->columns([
+                        'default' => 1,
+                        'xl' => 2,
+                    ])
                     ->schema([
-                        TextInput::make('password')
-                            ->password()
-                            ->dehydrateStateUsing(fn (string $state): string => Hash::make($state))
-                            ->dehydrated(fn (?string $state): bool => filled($state)),
-                    ])->hiddenOn('create'),
+                        Infolists\Components\ImageEntry::make('avatar')
+                            ->defaultImageUrl(fn ($record): string => Gravatar::get(email: $record->email))
+                            ->circular()
+                            ->label(''),
+                        Infolists\Components\TextEntry::make('bio')
+                            ->markdown(),
+                    ]),
+
             ]);
     }
 
@@ -70,19 +97,36 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('email')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime('M j, Y')
-                    ->sortable()
-                    ->visibleFrom('md'),
+                Split::make([
+                    ImageColumn::make('avatar')
+                        ->defaultImageUrl(fn ($record): string => Gravatar::get(email: $record->email))
+                        ->circular()
+                        ->grow(false)
+                        ->label(''),
+                    TextColumn::make('name')
+                        ->searchable()
+                        ->sortable(),
+                    TextColumn::make('email')
+                        ->searchable()
+                        ->sortable(),
+                    TextColumn::make('location')
+                        ->searchable(),
+                ])->from('md'),
             ])
-            ->filters([
-                //
+            ->actions([
+                ActionGroup::make([
+                    Action::make('view')
+                        ->url(fn (User $record): string => route('filament.admin.resources.users.view', $record))
+                        ->icon('heroicon-m-eye'),
+                    Action::make('edit')
+                        ->url(fn (User $record): string => route('filament.admin.resources.users.edit', $record))
+                        ->icon('heroicon-m-pencil'),
+                    Tables\Actions\DeleteAction::make(),
+                ])
+                    ->label('Actions'),
+            ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
             ]);
     }
 
@@ -99,6 +143,7 @@ class UserResource extends Resource
             'index' => Pages\ListUsers::route('/'),
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
+            'view' => Pages\ViewUser::route('/{record}'),
         ];
     }
 }

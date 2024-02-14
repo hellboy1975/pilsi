@@ -6,17 +6,17 @@ use App\Filament\Resources\CaveResource\Pages;
 use App\Filament\Resources\CaveResource\RelationManagers\SqueezesRelationManager;
 use App\Filament\Resources\CaveResource\RelationManagers\VisitsRelationManager;
 use App\Models\Cave;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Infolists;
+use Filament\Infolists\Components\Actions\Action as ActionsAction;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-
-// use Filament\Forms\Components\Section;
 
 class CaveResource extends Resource
 {
@@ -41,6 +41,7 @@ class CaveResource extends Resource
         return $infolist
             ->schema([
                 Infolists\Components\Section::make('Cave details')
+                    ->description(fn (Cave $record): string => "Added by {$record->creator->name}")
                     ->columns([
                         'default' => 1,
                         'xl' => 2,
@@ -49,8 +50,14 @@ class CaveResource extends Resource
                         Infolists\Components\TextEntry::make('name'),
                         Infolists\Components\TextEntry::make('code'),
                         Infolists\Components\TextEntry::make('region.name'),
+                        Infolists\Components\TextEntry::make('region.name'),
                         Infolists\Components\ImageEntry::make('main_picture')
                             ->columnSpanFull(),
+                    ])->headerActions([
+                        ActionsAction::make('Favourite')
+                            ->action(function (Cave $cave) {
+                                User::toggleFavourite($cave);
+                            })->icon(fn (Cave $record): string => User::hasFavourite($record) ? 'heroicon-m-heart' : 'heroicon-o-heart'),
                     ]),
 
             ]);
