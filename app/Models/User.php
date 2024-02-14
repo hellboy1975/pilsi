@@ -31,6 +31,7 @@ class User extends Authenticatable implements FilamentUser
         'avatar_url',
         'bio',
         'roles',
+        'location',
     ];
 
     /**

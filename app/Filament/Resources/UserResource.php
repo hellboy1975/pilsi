@@ -51,6 +51,8 @@ class UserResource extends Resource
                             ->required()
                             ->suffixIcon('heroicon-m-at-symbol')
                             ->maxLength(255),
+                        TextInput::make('location')
+                            ->maxLength(150),
                         Forms\Components\Select::make('roles')
                             ->relationship('roles', 'name')
                             ->multiple()
@@ -107,8 +109,9 @@ class UserResource extends Resource
                     TextColumn::make('email')
                         ->searchable()
                         ->sortable(),
-                ])
-                    ->from('md'),
+                    TextColumn::make('location')
+                        ->searchable(),
+                ])->from('md'),
             ])
             ->actions([
                 ActionGroup::make([

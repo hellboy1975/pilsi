@@ -68,9 +68,9 @@ class UserFavouriteResource extends Resource
                 function (UserFavourite $record): string {
                     if ($record->entity_type === Cave::class) {
                         return route('filament.admin.resources.caves.view', ['record' => $record]);
-                    } else if ($record->entity_type === Region::class) {
+                    } elseif ($record->entity_type === Region::class) {
                         return route('filament.admin.resources.regions.view', ['record' => $record]);
-                    } else if ($record->entity_type === Squeeze::class) {
+                    } elseif ($record->entity_type === Squeeze::class) {
                         return route('filament.admin.resources.squeezes.view', ['record' => $record]);
                     }
                 }
