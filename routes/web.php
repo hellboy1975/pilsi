@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::redirect('/login', '/admin/login');
+
 Route::get('/', function () {
     return view('index');
 });
