@@ -2,11 +2,8 @@
 
 namespace App\Livewire;
 
-use Jeffgreco13\FilamentBreezy\Livewire\MyProfileComponent;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
-use Filament\Facades\Filament;
 use Filament\Forms\Components\Group;
+use Filament\Forms\Components\TextInput;
 use Jeffgreco13\FilamentBreezy\Livewire\PersonalInfo;
 
 class PilsiProfileComponent extends PersonalInfo
