@@ -9104,22 +9104,22 @@
         },
         {
             "name": "filament/upgrade",
-            "version": "v3.2.42",
+            "version": "v3.2.44",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/upgrade.git",
-                "reference": "d297b33d2a9d6a791d62f03dc03be4a39ed67542"
+                "reference": "ba53bef05532b7ab6da769e8397aa2b34ec91e7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/upgrade/zipball/d297b33d2a9d6a791d62f03dc03be4a39ed67542",
-                "reference": "d297b33d2a9d6a791d62f03dc03be4a39ed67542",
+                "url": "https://api.github.com/repos/filamentphp/upgrade/zipball/ba53bef05532b7ab6da769e8397aa2b34ec91e7b",
+                "reference": "ba53bef05532b7ab6da769e8397aa2b34ec91e7b",
                 "shasum": ""
             },
             "require": {
                 "nunomaduro/termwind": "^1.0|^2.0",
                 "php": "^8.1",
-                "rector/rector": "^0.19"
+                "rector/rector": "^1.0"
             },
             "bin": [
                 "bin/filament-v3"
@@ -9140,7 +9140,7 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2024-02-27T15:33:13+00:00"
+            "time": "2024-03-04T12:10:01+00:00"
         },
         {
             "name": "filp/whoops",
@@ -10355,21 +10355,21 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.19.8",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "de3b3bb159abd704b144aa86fb244f7f1f4ac947"
+                "reference": "7596fa6da06c6a20c012efe6bb3d9188a9113b11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/de3b3bb159abd704b144aa86fb244f7f1f4ac947",
-                "reference": "de3b3bb159abd704b144aa86fb244f7f1f4ac947",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/7596fa6da06c6a20c012efe6bb3d9188a9113b11",
+                "reference": "7596fa6da06c6a20c012efe6bb3d9188a9113b11",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2|^8.0",
-                "phpstan/phpstan": "^1.10.56"
+                "phpstan/phpstan": "^1.10.57"
             },
             "conflict": {
                 "rector/rector-doctrine": "*",
@@ -10399,7 +10399,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.19.8"
+                "source": "https://github.com/rectorphp/rector/tree/1.0.2"
             },
             "funding": [
                 {
@@ -10407,7 +10407,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-05T10:59:13+00:00"
+            "time": "2024-03-03T12:32:31+00:00"
         },
         {
             "name": "sebastian/cli-parser",
