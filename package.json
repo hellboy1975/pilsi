@@ -16,6 +16,6 @@
         "vite": "^5.0.12"
     },
     "dependencies": {
-        "filament": "^1.49.2"
+        "filament": "^1.51.0"
     }
 }
