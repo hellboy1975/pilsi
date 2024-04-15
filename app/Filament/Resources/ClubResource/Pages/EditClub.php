@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\ClubResource\Pages;
 
 use App\Filament\Resources\ClubResource;
-use Filament\Pages\Actions;
+use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditClub extends EditRecord
@@ -13,7 +13,7 @@ class EditClub extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            DeleteAction::make(),
         ];
     }
 }
