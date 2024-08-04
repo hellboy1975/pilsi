@@ -19,6 +19,8 @@ class ListTrips extends Component implements HasForms, HasTable
     use InteractsWithForms;
     use InteractsWithTable;
 
+    /* TODO: add a filter to this to show only the current users visits
+    */
     public function table(Table $table): Table
     {
         return $table
