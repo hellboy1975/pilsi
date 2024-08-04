@@ -148,4 +148,12 @@ class User extends Authenticatable implements FilamentUser
             ['entity_type', $entity::class], // probs shouldn't hardcode this
         ])->exists();
     }
+
+    /**
+     * 
+     */
+    public function attendedTrips(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class)->withTimestamps();
+    }
 }

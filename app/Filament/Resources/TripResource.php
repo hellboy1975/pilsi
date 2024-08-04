@@ -5,7 +5,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\TripResource\Pages;
 use App\Filament\Resources\TripResource\RelationManagers\VisitsRelationManager;
 use App\Models\Trip;
+use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -43,6 +45,10 @@ class TripResource extends Resource
                     ->relationship('user', 'name')
                     ->label('Added by')
                     ->default(auth()->user()->id),
+                Select::make('attendees')
+                    ->label('Attendees')
+                    ->options(User::pluck('name', 'id'))
+                    ->multiple(),
                 Forms\Components\RichEditor::make('notes')
                     ->required()
                     ->maxLength(255)
