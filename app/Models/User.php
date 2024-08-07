@@ -68,6 +68,11 @@ class User extends Authenticatable implements FilamentUser
         return $this->belongsToMany(Club::class, 'user_club');
     }
 
+    public function trips(): HasMany
+    {
+        return $this->hasMany(UserTrip::class, 'user_id');
+    }
+
     public function canAccessPanel(Panel $panel): bool
     {
         if ($panel->getId() === 'admin') {
@@ -85,7 +90,7 @@ class User extends Authenticatable implements FilamentUser
     /**
      * Filters the favourites by caves
      *
-     * @return BelongsToMany
+     * @return HasMany
      */
     public function favourite_caves(): HasMany
     {
@@ -147,13 +152,5 @@ class User extends Authenticatable implements FilamentUser
             ['entity_id', $entity->id],
             ['entity_type', $entity::class], // probs shouldn't hardcode this
         ])->exists();
-    }
-
-    /**
-     * 
-     */
-    public function attendedTrips(): BelongsToMany
-    {
-        return $this->belongsToMany(User::class)->withTimestamps();
     }
 }
