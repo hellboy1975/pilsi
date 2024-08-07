@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Users;
 
-use App\Models\Visit;
+use App\Models\Trip;
+use App\Models\User;
+use App\Models\UserTrip;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Tables;
@@ -12,7 +14,7 @@ use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Livewire\Component;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class ListTrips extends Component implements HasForms, HasTable
 {
@@ -24,14 +26,14 @@ class ListTrips extends Component implements HasForms, HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(Visit::query())
+            // TODO: in the query function should be some code that querys the user_trips table and filters by user id
+            ->query(UserTrip::query()
+                ->join('trips', 'user_trips.trip_id', '=', 'trips.id')
+                ->where('user_trips.user_id', Auth::user()->id))
             ->columns([
                 TextColumn::make('start_date')
                 ->date(),
-                TextColumn::make('cave.name'),
-                TextColumn::make('trip.name'),
-                TextColumn::make('party_leader'),
-                TextColumn::make('duration')->suffix(' hours'),
+                TextColumn::make('name'),
             ])
             ->filters([
                 //
