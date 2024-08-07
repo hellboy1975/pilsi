@@ -2,8 +2,11 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\ClubResource\RelationManagers\UsersRelationManager;
 use App\Filament\Resources\TripResource\Pages;
+use App\Filament\Resources\TripResource\RelationManagers\AttendeesRelationManager;
 use App\Filament\Resources\TripResource\RelationManagers\VisitsRelationManager;
+use App\Filament\Resources\UserTripResource\RelationManagers\UsertripRelationManager;
 use App\Models\Trip;
 use App\Models\User;
 use Filament\Forms;
@@ -45,10 +48,6 @@ class TripResource extends Resource
                     ->relationship('user', 'name')
                     ->label('Added by')
                     ->default(auth()->user()->id),
-                Select::make('attendees')
-                    ->label('Attendees')
-                    ->options(User::pluck('name', 'id'))
-                    ->multiple(),
                 Forms\Components\RichEditor::make('notes')
                     ->required()
                     ->maxLength(255)
@@ -92,6 +91,7 @@ class TripResource extends Resource
     {
         return [
             VisitsRelationManager::class,
+            AttendeesRelationManager::class
         ];
     }
 
