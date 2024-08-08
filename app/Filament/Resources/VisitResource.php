@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\VisitResource\Pages;
 use App\Models\Visit;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -31,6 +32,9 @@ class VisitResource extends Resource
                 Forms\Components\TextInput::make('party_leader')
                     ->required()
                     ->maxLength(255),
+                TextInput::make('duration')
+                    ->numeric()
+                    ->suffix('hours'),
                 Forms\Components\Select::make('trip_id')
                     ->relationship('trip', 'name'),
                 Forms\Components\Select::make('cave_id')

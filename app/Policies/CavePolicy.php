@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Cave;
 use App\Models\User;
+use App\Models\Cave;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CavePolicy

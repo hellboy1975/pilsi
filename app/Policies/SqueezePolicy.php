@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Squeeze;
 use App\Models\User;
+use App\Models\Squeeze;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SqueezePolicy
