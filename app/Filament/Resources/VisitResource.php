@@ -3,6 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\VisitResource\Pages;
+use App\Models\Cave;
+use App\Models\Trip;
 use App\Models\Visit;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
@@ -36,9 +38,13 @@ class VisitResource extends Resource
                     ->numeric()
                     ->suffix('hours'),
                 Forms\Components\Select::make('trip_id')
-                    ->relationship('trip', 'name'),
+                    ->relationship('trip', 'name')
+                    ->getOptionLabelFromRecordUsing(fn (Trip $trip) => "{$trip->name} ({$trip->region->name})")
+                    ->searchable('name'),
                 Forms\Components\Select::make('cave_id')
-                    ->relationship('cave', 'name'),
+                    ->relationship('cave', 'name')
+                    ->getOptionLabelFromRecordUsing(fn (Cave $cave) => "[{$cave->code}] {$cave->name}")
+                    ->searchable(['name', 'code']),
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
                     ->label('Added by')
