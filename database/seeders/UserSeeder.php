@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -19,7 +18,7 @@ class UserSeeder extends Seeder
                 'id' => 1,
                 'email' => 'bot@pilsi.xyz',
                 'bio' => 'I am a bot which adds caves automagically',
-            ]
+            ],
         ];
 
         DB::table('users')->insert($users);

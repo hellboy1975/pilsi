@@ -92,7 +92,7 @@ class VisitResource extends Resource
     public static function getRelations(): array
     {
         return [
-            AttendeesRelationManager::class
+            AttendeesRelationManager::class,
         ];
     }
 

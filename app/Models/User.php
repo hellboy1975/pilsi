@@ -94,8 +94,6 @@ class User extends Authenticatable implements FilamentUser
 
     /**
      * Filters the favourites by caves
-     *
-     * @return HasMany
      */
     public function favourite_caves(): HasMany
     {

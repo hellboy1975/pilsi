@@ -15,8 +15,6 @@ class VisitsRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'id';
 
-
-
     public function form(Form $form): Form
     {
         return $form
