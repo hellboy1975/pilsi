@@ -44,7 +44,6 @@ class VisitResource extends Resource
                     ->label('Added by')
                     ->default(auth()->user()->id),
                 Forms\Components\MarkdownEditor::make('notes')
-                    ->required()
                     ->maxLength(255)
                     ->columnSpanFull(),
             ]);
