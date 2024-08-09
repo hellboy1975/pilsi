@@ -67,6 +67,9 @@ class VisitResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->visibleFrom('md'),
+                Tables\Columns\TextColumn::make('duration')
+                    ->sortable()
+                    ->visibleFrom('md'),
             ])
             ->filters([
                 //
