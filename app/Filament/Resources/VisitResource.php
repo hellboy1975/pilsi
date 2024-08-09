@@ -2,7 +2,10 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\TripResource\RelationManagers\AttendeesRelationManager;
 use App\Filament\Resources\VisitResource\Pages;
+use App\Models\Cave;
+use App\Models\Trip;
 use App\Models\Visit;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
@@ -36,15 +39,18 @@ class VisitResource extends Resource
                     ->numeric()
                     ->suffix('hours'),
                 Forms\Components\Select::make('trip_id')
-                    ->relationship('trip', 'name'),
+                    ->relationship('trip', 'name')
+                    ->getOptionLabelFromRecordUsing(fn (Trip $trip) => "{$trip->name} ({$trip->region->name})")
+                    ->searchable('name'),
                 Forms\Components\Select::make('cave_id')
-                    ->relationship('cave', 'name'),
+                    ->relationship('cave', 'name')
+                    ->getOptionLabelFromRecordUsing(fn (Cave $cave) => "[{$cave->code}] {$cave->name}")
+                    ->searchable(['name', 'code']),
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
                     ->label('Added by')
                     ->default(auth()->user()->id),
                 Forms\Components\MarkdownEditor::make('notes')
-                    ->required()
                     ->maxLength(255)
                     ->columnSpanFull(),
             ]);
@@ -68,6 +74,9 @@ class VisitResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->visibleFrom('md'),
+                Tables\Columns\TextColumn::make('duration')
+                    ->sortable()
+                    ->visibleFrom('md'),
             ])
             ->filters([
                 //
@@ -83,7 +92,7 @@ class VisitResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            AttendeesRelationManager::class,
         ];
     }
 

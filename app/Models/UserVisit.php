@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class UserTrip extends Model
+class UserVisit extends Model
 {
-    protected $fillable = ['trip_id', 'user_id'];
+    protected $fillable = ['visit_id', 'user_id'];
 
-    public function trips(): BelongsTo
+    public function visits(): BelongsTo
     {
-        return $this->belongsTo(Trip::class);
+        return $this->belongsTo(Visit::class);
     }
 
     public function users(): BelongsTo

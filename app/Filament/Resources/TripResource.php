@@ -2,15 +2,11 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ClubResource\RelationManagers\UsersRelationManager;
 use App\Filament\Resources\TripResource\Pages;
 use App\Filament\Resources\TripResource\RelationManagers\AttendeesRelationManager;
 use App\Filament\Resources\TripResource\RelationManagers\VisitsRelationManager;
-use App\Filament\Resources\UserTripResource\RelationManagers\UsertripRelationManager;
 use App\Models\Trip;
-use App\Models\User;
 use Filament\Forms;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -91,7 +87,7 @@ class TripResource extends Resource
     {
         return [
             VisitsRelationManager::class,
-            AttendeesRelationManager::class
+            AttendeesRelationManager::class,
         ];
     }
 

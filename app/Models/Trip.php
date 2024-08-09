@@ -32,7 +32,6 @@ class Trip extends Model
         return $this->belongsToMany(User::class, 'user_trips');
     }
 
-
     public function visits(): HasMany
     {
         return $this->hasMany(Visit::class, 'trip_id');
@@ -42,5 +41,4 @@ class Trip extends Model
     {
         return $this->hasMany(UserTrip::class, 'trip_id');
     }
-
 }
