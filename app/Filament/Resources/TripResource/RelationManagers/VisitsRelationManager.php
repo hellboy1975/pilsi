@@ -44,6 +44,7 @@ class VisitsRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('start_date')
                     ->searchable()
+                    ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('party_leader')
                     ->searchable()
