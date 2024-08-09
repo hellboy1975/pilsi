@@ -73,6 +73,11 @@ class User extends Authenticatable implements FilamentUser
         return $this->belongsToMany(Trip::class, 'user_trips');
     }
 
+    public function visits(): BelongsToMany
+    {
+        return $this->belongsToMany(Visit::class, 'user_visits');
+    }
+
     public function canAccessPanel(Panel $panel): bool
     {
         if ($panel->getId() === 'admin') {

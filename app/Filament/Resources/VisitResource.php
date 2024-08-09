@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\TripResource\RelationManagers\AttendeesRelationManager;
 use App\Filament\Resources\VisitResource\Pages;
 use App\Models\Cave;
 use App\Models\Trip;
@@ -91,7 +92,7 @@ class VisitResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            AttendeesRelationManager::class
         ];
     }
 
