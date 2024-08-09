@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TripResource\Pages;
+use App\Filament\Resources\TripResource\RelationManagers\AttendeesRelationManager;
 use App\Filament\Resources\TripResource\RelationManagers\VisitsRelationManager;
 use App\Models\Trip;
 use Filament\Forms;
@@ -86,6 +87,7 @@ class TripResource extends Resource
     {
         return [
             VisitsRelationManager::class,
+            AttendeesRelationManager::class,
         ];
     }
 
