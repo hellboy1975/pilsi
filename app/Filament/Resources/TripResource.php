@@ -7,6 +7,7 @@ use App\Filament\Resources\TripResource\RelationManagers\AttendeesRelationManage
 use App\Filament\Resources\TripResource\RelationManagers\VisitsRelationManager;
 use App\Models\Trip;
 use Filament\Forms;
+use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -44,8 +45,7 @@ class TripResource extends Resource
                     ->relationship('user', 'name')
                     ->label('Added by')
                     ->default(auth()->user()->id),
-                Forms\Components\RichEditor::make('notes')
-                    ->required()
+                MarkdownEditor::make('notes')
                     ->maxLength(255)
                     ->columnSpanFull(),
             ]);
