@@ -71,6 +71,8 @@ class TripResource extends Resource
                     ->relationship('user', 'name')
                     ->label('Added by')
                     ->default(auth()->user()->id),
+                Forms\Components\Select::make('privacy')
+                    ->options(Trip::privacySelect()),
                 MarkdownEditor::make('notes')
                     ->maxLength(255)
                     ->columnSpanFull(),

@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Users;
 
-use App\Models\UserTrip;
 use App\Models\UserVisit;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -11,10 +10,10 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
-use Livewire\Component;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Livewire\Component;
 
 class ListTrips extends Component implements HasForms, HasTable
 {
@@ -27,7 +26,7 @@ class ListTrips extends Component implements HasForms, HasTable
     {
         return $table
             ->query(UserVisit::query()
-                ->select(['visits.id', 'visits.start_date', 'trips.name as trip_name', 'visits.party_leader', 'visits.duration', DB::raw('CONCAT(caves.code, " ", caves.name) as cave_name'), ])
+                ->select(['visits.id', 'visits.start_date', 'trips.name as trip_name', 'visits.party_leader', 'visits.duration', DB::raw('CONCAT(caves.code, " ", caves.name) as cave_name')])
                 ->join('visits', 'user_visits.visit_id', '=', 'visits.id')
                 ->join('trips', 'visits.trip_id', '=', 'trips.id')
                 ->join('caves', 'visits.cave_id', '=', 'caves.id')

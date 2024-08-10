@@ -10,7 +10,17 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Trip extends Model
 {
-    protected $fillable = ['name', 'region_id', 'user_id', 'trip_leader', 'trip_leader_id', 'notes', 'start_date', 'end_date'];
+    protected $fillable = [
+        'name',
+        'region_id',
+        'user_id',
+        'trip_leader',
+        'trip_leader_id',
+        'notes',
+        'start_date',
+        'end_date',
+        'privacy',
+    ];
 
     use HasFactory;
 
@@ -40,5 +50,14 @@ class Trip extends Model
     public function user_trips(): HasMany
     {
         return $this->hasMany(UserTrip::class, 'trip_id');
+    }
+
+    public static function privacySelect(): array
+    {
+        return [
+            0 => 'Public',
+            1 => 'Private',
+            2 => 'Hidden',
+        ];
     }
 }
