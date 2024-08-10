@@ -2,8 +2,6 @@
 
 namespace App\Livewire\Users;
 
-use App\Models\Trip;
-use App\Models\User;
 use App\Models\UserTrip;
 use App\Models\UserVisit;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -16,6 +14,7 @@ use Filament\Tables\Table;
 use Livewire\Component;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ListTrips extends Component implements HasForms, HasTable
 {
@@ -28,19 +27,29 @@ class ListTrips extends Component implements HasForms, HasTable
     {
         return $table
             ->query(UserVisit::query()
-                ->select(['visits.id', 'visits.start_date', 'trips.name', 'visits.party_leader', 'visits.duration'])
+                ->select(['visits.id', 'visits.start_date', 'trips.name as trip_name', 'visits.party_leader', 'visits.duration', DB::raw('CONCAT(caves.code, " ", caves.name) as cave_name'), ])
                 ->join('visits', 'user_visits.visit_id', '=', 'visits.id')
                 ->join('trips', 'visits.trip_id', '=', 'trips.id')
+                ->join('caves', 'visits.cave_id', '=', 'caves.id')
                 ->where('user_visits.user_id', Auth::user()->id))
             ->columns([
                 TextColumn::make('start_date')
                     ->label('Date')
+                    ->sortable()
                     ->date(),
-                TextColumn::make('name')
-                    ->label('Trip'),
-                TextColumn::make('party_leader'),
+                TextColumn::make('trip_name')
+                    ->label('Trip')
+                    ->sortable()
+                    ->url(fn (UserVisit $record): string => route('filament.admin.resources.trips.view', ['record' => $record])),
+                TextColumn::make('cave_name')
+                    ->label('Cave')
+                    ->sortable()
+                    ->url(fn (UserVisit $record): string => route('filament.admin.resources.caves.view', ['record' => $record])),
+                TextColumn::make('party_leader')
+                    ->sortable(),
                 TextColumn::make('duration')
-                   ->label('Duration (hours)')
+                    ->label('Duration (hours)')
+                    ->sortable()
                     ->alignRight(),
             ])
             ->filters([
