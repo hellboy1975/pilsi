@@ -6,6 +6,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class TripsRelationManager extends RelationManager
@@ -28,7 +29,14 @@ class TripsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                TextColumn::make('name'),
+                TextColumn::make('start_date')
+                    ->date(),
+                TextColumn::make('end_date')
+                    ->date()
+                    ->visibleFrom('md'),
+                TextColumn::make('trip_leader')
+                    ->visibleFrom('md'),
             ])
             ->filters([
                 //
