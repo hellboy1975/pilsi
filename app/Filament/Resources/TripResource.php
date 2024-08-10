@@ -6,7 +6,6 @@ use App\Filament\Resources\TripResource\Pages;
 use App\Filament\Resources\TripResource\RelationManagers\AttendeesRelationManager;
 use App\Filament\Resources\TripResource\RelationManagers\VisitsRelationManager;
 use App\Models\Trip;
-use App\Models\TripPrivacy;
 use Filament\Forms;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Form;

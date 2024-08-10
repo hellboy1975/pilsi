@@ -19,11 +19,10 @@ class Trip extends Model
         'notes',
         'start_date',
         'end_date',
-        'privacy'
+        'privacy',
     ];
 
     use HasFactory;
-
 
     public function region(): BelongsTo
     {
@@ -58,7 +57,7 @@ class Trip extends Model
         return [
             0 => 'Public',
             1 => 'Private',
-            2 => 'Hidden'
+            2 => 'Hidden',
         ];
     }
 }
