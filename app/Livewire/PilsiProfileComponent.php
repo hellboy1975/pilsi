@@ -10,7 +10,7 @@ class PilsiProfileComponent extends PersonalInfo
 {
     public array $only = ['name', 'email', 'location'];
 
-    protected function getProfileFormSchema()
+    protected function getProfileFormSchema(): array
     {
         $groupFields = Group::make([
             $this->getNameComponent(),

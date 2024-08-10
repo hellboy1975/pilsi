@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\SqueezeResource\Pages;
 use App\Filament\Resources\SqueezeResource\RelationManagers\AttemptsRelationManager;
+use App\Models\Cave;
 use App\Models\Squeeze;
 use App\Models\User;
 use Filament\Forms;
@@ -83,7 +84,9 @@ class SqueezeResource extends Resource
                             ->required()
                             ->maxLength(255),
                         Forms\Components\Select::make('cave_id')
-                            ->relationship('cave', 'name'),
+                            ->relationship('cave', 'name')
+                            ->getOptionLabelFromRecordUsing(fn (Cave $cave) => "[{$cave->code}] {$cave->name}")
+                            ->searchable(['name', 'code']),
                         Forms\Components\Select::make('user_id')
                             ->relationship('user', 'name')
                             ->label('Added by')

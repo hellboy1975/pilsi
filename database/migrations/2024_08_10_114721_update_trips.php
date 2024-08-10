@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('location', 150)->nullable()->default('');
+        Schema::table('trips', function (Blueprint $table) {
+            $table->integer('privacy')->default(0);
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('caves', function (Blueprint $table) {
-            $table->dropColumn('location');
+        Schema::table('trips', function (Blueprint $table) {
+            $table->dropColumn('privacy');
         });
     }
 };

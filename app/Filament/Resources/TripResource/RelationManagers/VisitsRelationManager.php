@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\TripResource\RelationManagers;
 
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -19,22 +20,19 @@ class VisitsRelationManager extends RelationManager
         return $form
             ->schema([
                 Forms\Components\DatePicker::make('start_date')
-                    ->required(),
+                    ->required()
+                    ->default(today()),
                 Forms\Components\DatePicker::make('end_date')
-                    ->required(),
+                    ->required()
+                    ->default(today()),
+                Forms\Components\Select::make('cave_id')
+                    ->relationship('cave', 'name'),
                 Forms\Components\TextInput::make('party_leader')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Select::make('cave_id')
-                    ->relationship('cave', 'name'),
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'name')
-                    ->label('Added by')
-                    ->default(auth()->user()->id),
-                Forms\Components\MarkdownEditor::make('notes')
-                    ->required()
-                    ->maxLength(255)
-                    ->columnSpanFull(),
+                TextInput::make('duration')
+                    ->numeric()
+                    ->suffix('hours'),
             ]);
     }
 
@@ -44,6 +42,7 @@ class VisitsRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('start_date')
                     ->searchable()
+                    ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('party_leader')
                     ->searchable()
@@ -51,12 +50,19 @@ class VisitsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('cave.name')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('duration')
+                    ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                    ->mutateFormDataUsing(function (array $data): array {
+                        $data['user_id'] = auth()->id();
+
+                        return $data;
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

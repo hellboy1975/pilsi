@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('location', 150)->nullable()->default('');
+        Schema::create('user_visits', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('visit_id');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('caves', function (Blueprint $table) {
-            $table->dropColumn('location');
-        });
+        Schema::dropIfExists('user_visits');
     }
 };
