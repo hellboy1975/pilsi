@@ -97,6 +97,7 @@ class TripResource extends Resource
             'index' => Pages\ListTrips::route('/'),
             'create' => Pages\CreateTrip::route('/create'),
             'edit' => Pages\EditTrip::route('/{record}/edit'),
+            'view' => Pages\ViewTrip::route('/{record}'),
         ];
     }
 }
