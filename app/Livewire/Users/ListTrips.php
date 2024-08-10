@@ -2,8 +2,6 @@
 
 namespace App\Livewire\Users;
 
-use App\Models\Trip;
-use App\Models\User;
 use App\Models\UserTrip;
 use App\Models\UserVisit;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -37,14 +35,21 @@ class ListTrips extends Component implements HasForms, HasTable
             ->columns([
                 TextColumn::make('start_date')
                     ->label('Date')
+                    ->sortable()
                     ->date(),
                 TextColumn::make('trip_name')
-                    ->label('Trip'),
+                    ->label('Trip')
+                    ->sortable()
+                    ->url(fn (UserVisit $record): string => route('filament.admin.resources.trips.view', ['record' => $record])),
                 TextColumn::make('cave_name')
-                    ->label('Cave'),
-                TextColumn::make('party_leader'),
+                    ->label('Cave')
+                    ->sortable()
+                    ->url(fn (UserVisit $record): string => route('filament.admin.resources.caves.view', ['record' => $record])),
+                TextColumn::make('party_leader')
+                    ->sortable(),
                 TextColumn::make('duration')
-                   ->label('Duration (hours)')
+                    ->label('Duration (hours)')
+                    ->sortable()
                     ->alignRight(),
             ])
             ->filters([
