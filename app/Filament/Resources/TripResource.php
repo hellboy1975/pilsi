@@ -9,6 +9,9 @@ use App\Models\Trip;
 use Filament\Forms;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
@@ -23,6 +26,29 @@ class TripResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-arrow-trending-up';
 
     protected static ?int $navigationSort = 5;
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Section::make(fn (Trip $record): string => $record->name)
+                    ->description(fn (Trip $record): string => "Added by {$record->user->name}")
+                    ->columns([
+                        'default' => 1,
+                        'xl' => 2,
+                    ])
+                    ->schema([
+                        TextEntry::make('name'),
+                        TextEntry::make('trip_leader'),
+                        TextEntry::make('region.name'),
+                        TextEntry::make('start_date'),
+                        TextEntry::make('end_date'),
+                        TextEntry::make('notes')
+                            ->markdown()
+                            ->columnSpanFull(),
+                    ]),
+            ]);
+    }
 
     public static function form(Form $form): Form
     {
