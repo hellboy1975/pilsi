@@ -24,6 +24,14 @@ class VisitResource extends Resource
 
     protected static ?int $navigationSort = 6;
 
+    /**
+     * Get the navigation badge for the resource.
+     */
+    public static function getNavigationBadge(): ?string
+    {
+        return number_format(static::getModel()::count());
+    }
+
     public static function form(Form $form): Form
     {
         return $form
