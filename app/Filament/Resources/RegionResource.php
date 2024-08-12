@@ -15,6 +15,7 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action as ActionsAction;
 use Filament\Tables\Table;
 
 class RegionResource extends Resource
@@ -26,6 +27,14 @@ class RegionResource extends Resource
     protected static ?string $navigationGroup = 'Manage';
 
     protected static ?int $navigationSort = 1;
+
+    /**
+     * Get the navigation badge for the resource.
+     */
+    public static function getNavigationBadge(): ?string
+    {
+        return number_format(static::getModel()::count());
+    }
 
     public static function infolist(Infolist $infolist): Infolist
     {
@@ -82,6 +91,16 @@ class RegionResource extends Resource
                 Tables\Columns\TextColumn::make('code')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('country_code'),
+            ])
+            ->actions([
+                ActionsAction::make('view')
+                    ->url(fn (Region $record): string => route('filament.admin.resources.regions.view', $record))
+                    ->icon('heroicon-m-eye')
+                    ->iconButton(),
+                ActionsAction::make('edit')
+                    ->url(fn (Region $record): string => route('filament.admin.resources.regions.edit', $record))
+                    ->icon('heroicon-m-pencil')
+                    ->iconButton(),
             ])
             ->filters([
                 //
