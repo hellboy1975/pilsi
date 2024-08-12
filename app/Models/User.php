@@ -156,4 +156,20 @@ class User extends Authenticatable implements FilamentUser
             ['entity_type', $entity::class], // probs shouldn't hardcode this
         ])->exists();
     }
+
+    public static function visitCount(): int
+    {
+        return UserVisit::where(
+            'user_id', Auth::id()
+        )->count();
+    }
+
+    public static function visitDuration(): int
+    {
+        return UserVisit::where(
+            'user_visits.user_id', Auth::id()
+        )
+            ->join('visits', 'user_visits.visit_id', '=', 'visits.id')
+            ->sum('visits.duration');
+    }
 }

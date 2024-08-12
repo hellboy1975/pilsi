@@ -127,9 +127,6 @@ class CaveResource extends Resource
                     ->url(fn (Cave $record): string => route('filament.admin.resources.caves.edit', $record))
                     ->icon('heroicon-m-pencil')
                     ->iconButton(),
-            ])
-            ->headerActions([
-                Tables\Actions\CreateAction::make(),
             ]);
     }
 

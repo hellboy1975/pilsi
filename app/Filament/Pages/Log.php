@@ -2,6 +2,8 @@
 
 namespace App\Filament\Pages;
 
+use App\Filament\Widgets\LatestCaves;
+use App\Livewire\CaveLogOverview;
 use Filament\Pages\Page;
 
 class Log extends Page
@@ -11,4 +13,11 @@ class Log extends Page
     protected static ?string $navigationLabel = 'Cave Log';
 
     protected static string $view = 'filament.pages.log';
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            CaveLogOverview::class
+        ];
+    }
 }
