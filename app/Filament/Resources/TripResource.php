@@ -27,6 +27,14 @@ class TripResource extends Resource
 
     protected static ?int $navigationSort = 5;
 
+    /**
+     * Get the navigation badge for the resource.
+     */
+    public static function getNavigationBadge(): ?string
+    {
+        return number_format(static::getModel()::count());
+    }
+
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
