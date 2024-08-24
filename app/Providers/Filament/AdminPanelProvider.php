@@ -9,6 +9,7 @@ use Awcodes\FilamentGravatar\GravatarProvider;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -91,6 +92,12 @@ class AdminPanelProvider extends PanelProvider
                 'Manage',
                 'Security',
                 'Settings',
+            ])
+            ->navigationItems([
+                NavigationItem::make('New')
+                    ->icon('heroicon-o-plus')
+//                    ->group('My PilSi')
+                    ->sort(3),
             ]);
     }
 }
