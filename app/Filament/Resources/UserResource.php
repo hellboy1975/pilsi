@@ -132,9 +132,6 @@ class UserResource extends Resource
                     Tables\Actions\DeleteAction::make(),
                 ])
                     ->label('Actions'),
-            ])
-            ->headerActions([
-                Tables\Actions\CreateAction::make(),
             ]);
     }
 

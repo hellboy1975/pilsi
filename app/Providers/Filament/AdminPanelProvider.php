@@ -76,11 +76,9 @@ class AdminPanelProvider extends PanelProvider
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 BreezyCore::make()
                     ->myProfile(
-                        shouldRegisterUserMenu: true, // Sets the 'account' link in the panel User Menu (default = true)
                         shouldRegisterNavigation: true, // Adds a main navigation item for the My Profile page (default = false)
-                        navigationGroup: 'Settings', // Sets the navigation group for the My Profile page (default = null)
-                        hasAvatars: false, // Enables the avatar upload form component (default = false)
-                        slug: 'profile' // Sets the slug for the profile page (default = 'my-profile')
+                        slug: 'profile', // Enables the avatar upload form component (default = false)
+                        navigationGroup: 'Settings' // Sets the slug for the profile page (default = 'my-profile')
                     )
                     ->myProfileComponents([
                         'personal_info' => PilsiProfileComponent::class,
