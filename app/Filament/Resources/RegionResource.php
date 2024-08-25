@@ -17,6 +17,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action as ActionsAction;
 use Filament\Tables\Table;
+use League\ISO3166\ISO3166;
 
 class RegionResource extends Resource
 {
@@ -40,7 +41,7 @@ class RegionResource extends Resource
     {
         return $infolist
             ->schema([
-                Section::make('Squeeze details')
+                Section::make('Region details')
                     ->columns([
                         'default' => 1,
                         'xl' => 2,
@@ -49,7 +50,9 @@ class RegionResource extends Resource
                         TextEntry::make('name'),
                         TextEntry::make('code'),
                         TextEntry::make('country_code')
-                            ->label('Country'),
+                            ->label('Country')
+                            ->formatStateUsing(fn (string $state): string => __(
+                                (new ISO3166)->alpha2($state)['name'])),
                         TextEntry::make('description')
                             ->columnSpanFull(),
                     ])
@@ -90,7 +93,10 @@ class RegionResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('code')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('country_code'),
+                Tables\Columns\TextColumn::make('country_code')
+                    ->searchable()
+                    ->formatStateUsing(fn (string $state): string => __(
+                        (new ISO3166)->alpha2($state)['name'])),
             ])
             ->actions([
                 ActionsAction::make('view')
