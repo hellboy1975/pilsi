@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Models\Cave;
 use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;

@@ -2,7 +2,6 @@
 
 namespace App\Filament\Pages;
 
-use App\Filament\Widgets\LatestCaves;
 use App\Livewire\CaveLogOverview;
 use Filament\Pages\Page;
 
@@ -17,7 +16,7 @@ class Log extends Page
     protected function getHeaderWidgets(): array
     {
         return [
-            CaveLogOverview::class
+            CaveLogOverview::class,
         ];
     }
 }
