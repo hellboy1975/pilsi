@@ -67,7 +67,7 @@ I've configured the .env file to use the following ports:
 * 3000 for the website
 * 3306 for MySQL
 
-These are set in the .env file
+Feel free to change them to suit your needs
 
 ### Daily operations
 
