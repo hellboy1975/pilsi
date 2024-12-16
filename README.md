@@ -67,8 +67,6 @@ I've configured the .env file to use the following ports:
 * 3000 for the website
 * 3306 for MySQL
 
-These are set in the .env file
-
 ### Daily operations
 
 You can start the application with:
