@@ -49,7 +49,7 @@ class RegionResource extends Resource
                         TextEntry::make('name'),
                         TextEntry::make('code'),
                         TextEntry::make('country_code')
-                            ->label('PiLSi'),
+                            ->label('Country'),
                         TextEntry::make('description')
                             ->columnSpanFull(),
                     ])
